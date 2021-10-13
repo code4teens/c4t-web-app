@@ -5,10 +5,12 @@ from auth import auth
 from config import prod_config
 from database import db_session
 from models import User
+from user import user
 
 app = Flask(__name__)
 app.config.from_object(prod_config)
 app.register_blueprint(auth)
+app.register_blueprint(user)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
