@@ -1,9 +1,11 @@
 from flask import Flask, render_template
 
+from auth import auth
 from config import prod_config
 
 app = Flask(__name__)
 app.config.from_object(prod_config)
+app.register_blueprint(auth)
 
 
 @app.route('/')
