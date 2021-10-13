@@ -1,7 +1,6 @@
-import os
-
 from flask import Blueprint, flash, render_template, request
-import requests
+
+from models import User
 
 auth = Blueprint('auth', __name__, template_folder='templates/auth')
 
@@ -15,18 +14,11 @@ def login_get():
 def login_post():
     id = request.form.get('id')
     password = request.form.get('password')
+    user = User.query.filter_by(id=id).one_or_none()
 
-    api = os.environ.get('API_URL')
-    url = f'{api}/users/{id}/login'
-    r = requests.post(url, json={'password': password})
-
-    if r.status_code == 200:
-        pass
-    elif r.status_code == 401:
-        flash('Invalid password.')
-    elif r.status_code == 404:
-        flash('Invalid username.')
+    if user is None:
+        flash('Invalid ID.')
     else:
-        flash('An error occurred.')
+        flash(id)
 
     return render_template('login.html')
