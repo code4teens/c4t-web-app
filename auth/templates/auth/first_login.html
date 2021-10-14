@@ -2,20 +2,20 @@
 {% block description %}
   <meta name="description" content="Login to C4T!">
 {% endblock %}
-{% block title %}Login{% endblock %}
+{% block title %}First-time login{% endblock %}
 {% block style %}
   <link href="/static/login.css" rel="stylesheet">
 {% endblock %}
 {% block content %}
-  <form class="form-signin text-center", method="post", action="/login">
+  <form class="form-signin text-center", method="post", action="/first_login">
     <!-- <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
-    <h1 class="h3 mb-3 fw-normal">Please log in</h1>
+    <h1 class="h3 mb-3 fw-normal">First-time login</h1>
 
     {% with messages = get_flashed_messages() %}
     {% if messages %}
-        <div class="alert alert-danger" role="alert">
-            {{ messages[0] }}
-        </div>
+      <div class="alert alert-danger" role="alert">
+        {{ messages[0] }}
+      </div>
     {% endif %}
     {% endwith %}
 
@@ -25,16 +25,16 @@
     </div>
 
     <div class="form-floating">
-      <input type="password" class="form-control input-bottom" id="password" name="password" placeholder="password">
+      <input type="password" class="form-control input-middle" id="password" name="password" placeholder="password">
       <label for="password">Password</label>
     </div>
 
-    <div class="d-grid gap-1">
-      <button class="w-100 btn btn-primary btn-lg" type="submit">Log in</button>
-      <a href="/first_login">
-        <button class="w-100 btn btn-secondary btn-lg" type="button">First-time login</button>
-      </a>
+    <div class="form-floating">
+      <input type="password" class="form-control input-bottom" id="confirm-password" name="confirm-password" placeholder="password">
+      <label for="confirm-password">Confirm password</label>
     </div>
+
+    <button class="w-100 btn btn-primary btn-lg" type="submit">Log in</button>
 
     <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
   </form>
