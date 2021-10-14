@@ -31,7 +31,7 @@ def login_post():
     ):
         login_user(user)
 
-        return redirect(url_for('user.profile', id=current_user.id))
+        return redirect(url_for('index'))
     else:
         flash('Wrong password')
 
@@ -65,7 +65,7 @@ def first_login_post():
         db_session.commit()
         login_user(user)
 
-        return redirect(url_for('user.profile', id=current_user.id))
+        return redirect(url_for('index'))
 
     return render_template('first_login.html')
 
