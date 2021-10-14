@@ -37,6 +37,11 @@
                 <li><a class="dropdown-item" href="#">Something else here</a></li>
               </ul>
             </li> -->
+            {% if current_user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="/profile/{{ current_user.id }}">Profile</a>
+              </li>
+            {% endif %}
           </ul>
           <ul class="navbar-nav navbar-right mb-2 mb-sm-0">
             {% if current_user.is_authenticated %}
