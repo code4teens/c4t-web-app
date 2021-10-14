@@ -70,6 +70,33 @@ def first_login_post():
     return render_template('first_login.html')
 
 
+@auth.route('/change_password')
+@login_required
+def change_password_get():
+    return render_template('change_password.html')
+
+
+@auth.route('/change_password', methods=['POST'])
+@login_required
+def change_password_post():
+    password = request.form.get('password')
+    confirm_password = request.form.get('confirm-password')
+    user = User.query.filter_by(id=current_user.id).one_or_none()
+
+    if password is None or confirm_password is None \
+            or password != confirm_password:
+        flash('Passwords do not match', 'danger')
+    else:
+        user.password = bcrypt.hashpw(
+            password.encode('utf-8'), bcrypt.gensalt()
+        )
+        db_session.merge(user)
+        db_session.commit()
+        flash('Password successfully changed', 'success')
+
+    return render_template('change_password.html')
+
+
 @auth.route('/logout')
 @login_required
 def logout():

@@ -29,7 +29,9 @@
       <input type="text" class="form-control" id="cohort"value="{{ user.cohort_id }}" readonly>
     </div>
     {% if user.id == current_user.id %}
-      <button class="w-100 btn btn-danger" type="submit">Change password</button>
+      <a href="/change_password">
+        <button class="w-100 btn btn-danger" type="button">Change password</button>
+      </a>
     {% endif %}
   </form>
 {% endblock %}
