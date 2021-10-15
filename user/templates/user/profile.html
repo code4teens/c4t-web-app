@@ -26,7 +26,7 @@
     </div>
     <div class="mb-3">
       <label for="cohort" class="form-label">Cohort</label>
-      <input type="text" class="form-control" id="cohort"value="{{ user.cohort_id }}" readonly>
+      <input type="text" class="form-control" id="cohort"value="{{ user.cohort.name }}" readonly>
     </div>
     {% if user.id == current_user.id %}
       <a href="/change_password">
