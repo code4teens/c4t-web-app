@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block style %}
+<link href="/static/dashboard.css" rel="stylesheet">
+{%endblock %}
+{% block title %}
+Dashboard
+{% endblock %}
+{% block content %}
+<section class="py-5 text-center container">
+   <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+         <div class="container">
+            <img src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png" width=150 height=150>
+         </div>
+         <br>
+         <h1 class="fw-light">{{current_user.display_name}}</h1>
+         <p class="lead text-muted">Level X.XX</p>
+		 <p class="lead text-muted">Bot Name: Placeholder</p>
+		 <p class="lead text-muted">Cohor start date: 01/12/2021</p>
+         <p>
+         </p>
+      </div>
+	<div class="col-lg-8 col-md-10 mx-auto">
+		<div class="card mb-4 rounded-3 shadow-sm">
+			<div class="card-header py-3">
+				<h4 class="my-0 fw-normal">Peer Discussions</h4>
+			</div>
+			<div class="card-body">
+				<h1 class="card-title pricing-card-title">Total: <small class="text-muted fw-light">x</small></h1>
+				<ul class="list-unstyled mt-3 mb-4">
+				<li>Average Score: X</li>
+				<li>Average discussion rating: X</li>
+				</ul>
+				<div>
+					<button type="button" class="w-50 btn btn-lg btn-primary">Book a peer discussion</button>
+				</div>
+				<br>
+				<div>
+					<button type="button" class="w-50 btn btn-lg btn-primary">Create a discussion slot</button>
+				</div>
+			</div>
+		</div>
+	</div>
+  </div>
+</section >
+
+{% endblock %}
