@@ -26,7 +26,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarItems">
           <div class="navbar-nav me-auto">
+            {% if current_user.is_authenticated %}
             <a class="nav-link{{ ' active' if active_page == 'dashboard' else '' }}" href="/dashboard">Dashboard</a>
+            {% else %}
+            <hr class="m-1">
+            {% endif %}
           </div>
           <div class="navbar-nav">
             {% if current_user.is_authenticated %}
