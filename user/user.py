@@ -16,12 +16,22 @@ def profile(id):
 
     return render_template('profile.html', user=user)
 
-@user.route('/dashboard', methods=['GET', 'POST'])
+
+@user.route('/dashboard')
 @login_required
-def dashboard_page():
-    print(dir(current_user))
+def dashboard():
     user = User.query.filter_by(name=current_user.name)
     if user is None:
         abort(404)
 
     return render_template('dashboard.html', user=user)
+
+
+@user.route('/other_dashboard')
+@login_required
+def other_dashboard():
+    user = User.query.filter_by(name=current_user.name)
+    if user is None:
+        abort(404)
+
+    return render_template('other_dashboard.html', user=user)
