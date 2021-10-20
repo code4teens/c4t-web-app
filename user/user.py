@@ -20,3 +20,9 @@ def profile(id):
 @login_required
 def dashboard():
     return render_template('dashboard.html', user=current_user)
+
+
+@user.route('/discussions')
+@login_required
+def discussions():
+    return render_template('discussion.html')
