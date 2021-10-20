@@ -11,7 +11,7 @@ auth = Blueprint('auth', __name__, template_folder='templates/auth')
 @auth.route('/login')
 def login_get():
     if current_user.is_authenticated:
-        return redirect(url_for('user.profile', id=current_user.id))
+        return redirect(url_for('user.dashboard', id=current_user.id))
 
     return render_template('login.html')
 
@@ -22,7 +22,9 @@ def login_post():
     password = request.form.get('password')
     user = User.query.filter_by(id=id).one_or_none()
 
-    if user is None:
+    if len(id) == 0 or len(password) == 0:
+        flash('Do not leave any fields blank')
+    elif user is None:
         flash('ID does not exist')
     elif user.password is None:
         flash('Please click first-time login')
@@ -31,7 +33,7 @@ def login_post():
     ):
         login_user(user)
 
-        return redirect(url_for('index'))
+        return redirect(url_for('user.dashboard'))
     else:
         flash('Wrong password')
 
@@ -50,7 +52,9 @@ def first_login_post():
     confirm_password = request.form.get('confirm-password')
     user = User.query.filter_by(id=id).one_or_none()
 
-    if user is None:
+    if len(id) == 0 or len(password) == 0 or len(confirm_password) == 0:
+        flash('Do not leave any fields blank')
+    elif user is None:
         flash('ID does not exist')
     elif user.password is not None:
         flash('You already set a password')
@@ -65,7 +69,7 @@ def first_login_post():
         db_session.commit()
         login_user(user)
 
-        return redirect(url_for('index'))
+        return redirect(url_for('user.dashboard'))
 
     return render_template('first_login.html')
 
@@ -83,8 +87,9 @@ def change_password_post():
     confirm_password = request.form.get('confirm-password')
     user = User.query.filter_by(id=current_user.id).one_or_none()
 
-    if password is None or confirm_password is None \
-            or password != confirm_password:
+    if len(password) == 0 or len(confirm_password) == 0:
+        flash('Do not leave any fields blank', 'danger')
+    elif password != confirm_password:
         flash('Passwords do not match', 'danger')
     else:
         user.password = bcrypt.hashpw(
