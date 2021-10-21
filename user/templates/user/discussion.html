@@ -1,88 +1,97 @@
 {% extends 'base.html' %}
 {% block title %}Discussion{% endblock %}
 {% block content %}
-<div class="container py-4" style="max-width: 960px;">
-  <h3 class="pb-3 mb-3 border-bottom">Discussion #0042</h3>
+<form class="container py-4 needs-validation" method="post" action="/discussions/{{ eval.id }}" style="max-width: 960px;" novalidate>
+  <h3 class="pb-3 mb-3 border-bottom">Discussion #{{ '%04d' % eval.id }}</h3>
 
-  <h4 class="mb-2">Reviewee Details</h4>
+  <h4 class="mb-2">Overview</h4>
 
   <div class="row g-2">
-    <div class="col-12">
-      <label for="name" class="form-label">Name</label>
-      <input type="text" class="form-control" id="name" value="Hans Hazairi" readonly>
-    </div>
-    <div class="col-sm-6">
-      <label for="id" class="form-label">ID</label>
-      <input type="text" class="form-control" id="id" value="160369095965933568" readonly>
-    </div>
-    <div class="col-sm-6">
-      <label for="username" class="form-label">Username</label>
-      <input type="text" class="form-control" id="username" value="hanshazairi#4479" readonly>
-    </div>
     <div class="col-sm-10">
-      <label for="cohort" class="form-label">Cohort</label>
-      <input type="text" class="form-control" id="cohort" value="discord.py Botcamp (Dec 2021)" readonly>
+      <label class="form-label" for="cohort">Cohort</label>
+      <input class="form-control" id="cohort" value="{{ eval.cohort.name }}" readonly>
     </div>
+
     <div class="col-sm-2">
-      <label for="day" class="form-label">Day</label>
-      <input type="text" class="form-control" id="day" value="2" readonly>
+      <label class="form-label" for="day">Day</label>
+      <input class="form-control" id="day" value="{{ eval.day }}" readonly>
     </div>
+
+    {% if eval.evaluator.id != current_user.id %}
+    <div class="col-12">
+      <label class="form-label" for="name">Reviewer Name</label>
+      <input class="form-control" id="name" value="{{ eval.evaluator.display_name }}" readonly>
+    </div>
+
+    <div class="col-sm-6">
+      <label class="form-label" for="id">Reviewer ID</label>
+      <input class="form-control" id="id" value="{{ eval.evaluator.id }}" readonly>
+    </div>
+
+    <div class="col-sm-6">
+      <label class="form-label" for="username">Reviewer Username</label>
+      <input class="form-control" id="username" value="{{ eval.evaluator.name }}#{{ eval.evaluator.discriminator }}" readonly>
+    </div>
+    {% endif %}
+
+    {% if eval.evaluatee.id != current_user.id %}
+    <div class="col-12">
+      <label class="form-label" for="name">Reviewee Name</label>
+      <input class="form-control" id="name" value="{{ eval.evaluatee.display_name }}" readonly>
+    </div>
+
+    <div class="col-sm-6">
+      <label class="form-label" for="id">Reviewee ID</label>
+      <input class="form-control" id="id" value="{{ eval.evaluatee.id }}" readonly>
+    </div>
+
+    <div class="col-sm-6">
+      <label class="form-label" for="username">Reviewee Username</label>
+      <input class="form-control" id="username" value="{{ eval.evaluatee.name }}#{{ eval.evaluatee.discriminator }}" readonly>
+    </div>
+    {% endif %}
   </div>
 
   <hr class="my-4">
 
   <h4 class="mb-2">Review</h4>
 
-  <form class="needs-validation" novalidate>
+  {% if eval.response is not none or current_user.id == eval.evaluator.id %}
+    {% for key, value in eval.cohort.questionnaire.get('d' ~ eval.day).items() %}
     <div class="mb-3">
-      <p class="mb-1">Q1. Did your peer complete their project?</p>
+      <p class="mb-1">{{ key|upper }}. {{ value.get('title') }}</p>
+      {% for option in value.options %}
       <div class="form-check">
-        <input id="q1-no" name="q1" type="radio" class="form-check-input" checked required>
-        <label class="form-check-label" for="q1-no">No</label>
+        {% if eval.response is none %}
+        <input class="form-check-input" id="{{ key }}-{{ option|lower }}" name="{{ key }}" type="radio" value="{{ option }}" {{ 'checked' if loop.index == 1 }} required>
+        {% else %}
+        <input class="form-check-input" id="{{ key }}-{{ option|lower }}" type="radio" value="{{ option }}" {{ 'checked' if eval.response.get(key) == option else 'disabled' }}>
+        {% endif %}
+        <label class="form-check-label" for="{{ key }}-{{ option|lower }}">{{ option|capitalize }}</label>
       </div>
-      <div class="form-check">
-        <input id="q1-yes" name="q1" type="radio" class="form-check-input" required>
-        <label class="form-check-label" for="q1-yes">Yes</label>
-      </div>
+      {% endfor %}
     </div>
-
-    <div class="mb-3">
-      <p class="mb-1">Q2. Was your peer able to solve Q1 of the project?</p>
-      <div class="form-check">
-        <input id="q2-no" name="q2" type="radio" class="form-check-input" checked required>
-        <label class="form-check-label" for="q2-no">No</label>
-      </div>
-      <div class="form-check">
-        <input id="q2-yes" name="q2" type="radio" class="form-check-input" required>
-        <label class="form-check-label" for="q2-yes">Yes</label>
-      </div>
-    </div>
+    {% endfor %}
 
     <div class="mb-3">
-      <p class="mb-1">Q3. Was your peer able to solve Q2 of the project?</p>
-      <div class="form-check">
-        <input id="q3-no" name="q3" type="radio" class="form-check-input" checked required>
-        <label class="form-check-label" for="q3-no">No</label>
-      </div>
-      <div class="form-check">
-        <input id="q3-yes" name="q3" type="radio" class="form-check-input" required>
-        <label class="form-check-label" for="q3-yes">Yes</label>
-      </div>
+      <label class="form-label" for="comments">Comments</label>
+      {% if eval.response is none %}
+      <textarea class="form-control" id="comments" name="comments" placeholder="Write something..." minlength="10" maxlength="500" required></textarea>
+      {% else %}
+      <textarea class="form-control" id="comments" disabled>{{ eval.response.get('comments') }}</textarea>
+      {% endif %}
+      <small class="text-muted">Comments must be between 10-500 characters.</small>
     </div>
+  {% else %}
+  <p>{{ eval.evaluator.display_name }} has yet to review.</p>
+  {% endif %}
 
-    <div class="mb-3">
-      <label for="feedback" class="form-label">Feedback</label>
-      <textarea class="form-control" id="feedback" rows="2" placeholder="Write something..." required></textarea>
-      <div class="invalid-feedback">
-        Feedback is required
-      </div>
-    </div>
+  {% if (eval.response is none and current_user.id == eval.evaluator.id) or (eval.response is not none and eval.feedback is none and current_user.id == eval.evaluatee.id) %}
+  <hr class="my-4">
 
-    <hr class="my-4">
-
-    <button class="btn btn-primary w-100" type="submit">Submit</button>
-  </form>
-</div>
+  <button class="btn btn-primary w-100" type="submit">Submit</button>
+  {% endif %}
+</form>
 <script>
   (function () {
   'use strict'

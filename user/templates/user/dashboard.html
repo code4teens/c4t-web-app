@@ -6,7 +6,7 @@
 {% block title %}Dashboard{% endblock %}
 {% block content %}
 <div class="container py-4" style="max-width: 960px;">
-  <h3 class="pb-3 mb-4 border-bottom">{{ user.cohort.name }}</h3>
+  <h3 class="pb-3 mb-4 border-bottom">{{ user.enrolments[0].cohort.name }}</h3>
   <h4>To-Do List</h4>
   <div class="list-group mb-4">
     <div class="list-group-item">
