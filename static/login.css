@@ -1,29 +1,14 @@
-.navbar {
-  margin-bottom: 100px;
-}
-
-.form-signin {
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
-}
-
-.form-signin {
-  font-weight: 400;
-}
-
-.form-signin .form-floating:focus-within {
+.form-login .form-floating:focus-within {
   z-index: 2;
 }
 
-.input-top {
+.form-input-top {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.input-middle {
+.form-input-middle {
   margin-bottom: -1px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -31,8 +16,7 @@
   border-bottom-left-radius: 0;
 }
 
-.input-bottom {
-  margin-bottom: 10px;
+.form-input-bottom {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }

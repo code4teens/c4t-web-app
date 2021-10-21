@@ -5,13 +5,11 @@
 {% block title %}Welcome{% endblock %}
 {% block content %}
 <div class="container py-4">
-  <header class="pb-3 mb-4 border-bottom">
-    {% if current_user.is_authenticated %}
-    <h3 class="mb-1">Welcome, {{ current_user.display_name }}!</h3>
-    {% else %}
-    <h3 class="mb-1">Welcome!</h3>
-    {% endif %}
-  </header>
+  {% if current_user.is_authenticated %}
+  <h3 class="pb-3 mb-3 border-bottom">Welcome, {{ current_user.display_name }}!</h3>
+  {% else %}
+  <h3 class="pb-3 mb-3 border-bottom">Welcome!</h3>
+  {% endif %}
 
   <div class="p-5 mb-4 bg-light rounded-3">
     <div class="container-fluid py-5">

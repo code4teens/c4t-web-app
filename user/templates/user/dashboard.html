@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% set active_page = 'dashboard' %}
+{% block description %}
+<meta name="description" content="Dashboard">
+{% endblock %}
 {% block title %}Dashboard{% endblock %}
 {% block content %}
-<div class="container py-4">
-  <h3 class="pb-3 mb-4 border-bottom">Discord.py Botcamp</h3>
+<div class="container py-4" style="max-width: 960px;">
+  <h3 class="pb-3 mb-4 border-bottom">{{ user.cohort.name }}</h3>
   <h4>To-Do List</h4>
   <div class="list-group mb-4">
     <div class="list-group-item">
