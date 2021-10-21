@@ -72,6 +72,7 @@ class Cohort(Base):
     duration = Column(SmallInteger, nullable=False)
     start_date = Column(DateTime, nullable=False)
     questionnaire = Column(JSON, nullable=False)
+    feedback = Column(JSON, nullable=False)
 
     enrolments = relationship(
         'Enrolment', back_populates='cohort', order_by='Enrolment.id'

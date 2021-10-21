@@ -39,7 +39,11 @@ def discussions_post(id):
     if eval is None:
         abort(404)
 
-    eval.response = request.form
+    if eval.response is None:
+        eval.response = request.form
+    else:
+        eval.feedback = request.form
+
     db_session.merge(eval)
     db_session.commit()
 
