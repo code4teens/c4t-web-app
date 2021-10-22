@@ -163,7 +163,7 @@
   {% elif eval.response is none %}
   <p>Section temporarily hidden.</p>
   {% else %}
-  <p>{{ eval.evaluatee.display_name }} has yet to leave their feedback.</p>
+  <p>{{ eval.evaluatee.display_name }} has yet to submit their feedback.</p>
   {% endif %}
 
   {% if (eval.response is none and current_user.id == eval.evaluator.id) or
