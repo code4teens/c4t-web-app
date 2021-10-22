@@ -73,21 +73,21 @@
 
   <h4 class="mb-2">Review</h4>
 
-  {% if (eval.response is not none and eval.feedback is not none) or
+  {% if (eval.review is not none and eval.feedback is not none) or
   current_user.id == eval.evaluator.id %}
-  {% for key, value in eval.cohort.questionnaire.get('d' ~ eval.day).items() %}
+  {% for key, value in eval.cohort.review_schema.get('d' ~ eval.day).items() %}
   <div class="mb-3">
     <p class="mb-1">{{ key|upper }}. {{ value.get('title') }}</p>
     {% for option in value.options %}
     <div class="form-check">
-      {% if eval.response is none %}
+      {% if eval.review is none %}
       <input class="form-check-input" id="{{ key }}-{{ option|lower }}"
         name="{{ key }}" type="radio" value="{{ option }}" {{ 'checked' if
         loop.index==1 }} required>
       {% else %}
       <input class="form-check-input" id="{{ key }}-{{ option|lower }}"
         type="radio" value="{{ option }}" {{ 'checked' if
-        eval.response.get(key)==option else 'disabled' }}>
+        eval.review.get(key)==option else 'disabled' }}>
       {% endif %}
       <label class="form-check-label" for="{{ key }}-{{ option|lower }}">{{
         option|capitalize }}</label>
@@ -98,18 +98,18 @@
 
   <div class="mb-3">
     <label class="form-label" for="comments">Comments</label>
-    {% if eval.response is none %}
+    {% if eval.review is none %}
     <textarea class="form-control" id="comments" name="comments"
       placeholder="Write something..." rows="5" minlength="10" maxlength="500"
       required></textarea>
     {% else %}
     <textarea class="form-control" id="comments" rows="5"
-      readonly>{{ eval.response.get('comments') }}</textarea>
+      readonly>{{ eval.review.get('comments') }}</textarea>
     {% endif %}
     <small class="text-muted">Comments must be between 10-500
       characters.</small>
   </div>
-  {% elif eval.response is none %}
+  {% elif eval.review is none %}
   <p>{{ eval.evaluator.display_name }} has yet to review.</p>
   {% elif current_user.id == eval.evaluatee.id %}
   <p>Please complete below feedback to see {{ eval.evaluator.display_name }}'s
@@ -122,8 +122,8 @@
 
   <h4 class="mb-2">Feedback</h4>
 
-  {% if (eval.response is not none and eval.feedback is not none) or
-  (eval.response is not none and eval.feedback is none and current_user.id ==
+  {% if (eval.review is not none and eval.feedback is not none) or
+  (eval.review is not none and eval.feedback is none and current_user.id ==
   eval.evaluatee.id) %}
   {% for key, value in eval.cohort.feedback_schema.get('d' ~ eval.day).items()
   %}
@@ -160,14 +160,14 @@
     <small class="text-muted">Comments must be between 10-500
       characters.</small>
   </div>
-  {% elif eval.response is none %}
+  {% elif eval.review is none %}
   <p>Section temporarily hidden.</p>
   {% else %}
   <p>{{ eval.evaluatee.display_name }} has yet to submit their feedback.</p>
   {% endif %}
 
-  {% if (eval.response is none and current_user.id == eval.evaluator.id) or
-  (eval.response is not none and eval.feedback is none and current_user.id ==
+  {% if (eval.review is none and current_user.id == eval.evaluator.id) or
+  (eval.review is not none and eval.feedback is none and current_user.id ==
   eval.evaluatee.id) %}
   <hr class="my-4">
 

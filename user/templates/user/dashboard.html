@@ -22,7 +22,7 @@
         <h5 class="mb-1">Day {{ eval.day }}</h5>
         <small>x days ago</small>
       </div>
-      {% if eval.response is none %}
+      {% if eval.review is none %}
       {% if eval.evaluator.id == current_user.id %}
       <p class="mb-1">Review {{ eval.evaluatee.display_name }}'s code.</p>
       {% else %}
@@ -68,7 +68,7 @@
           <td>{{ eval.evaluator.display_name }}</td>
           {% endif %}
           <td>
-            {% if eval.response is none or eval.feedback is none %}
+            {% if eval.review is none or eval.feedback is none %}
             <img src="/static/x-lg.svg" alt="" width="20" height="20">
             {% else %}
             <img src="/static/check-lg.svg" alt="" width="20" height="20">

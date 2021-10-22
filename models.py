@@ -61,7 +61,7 @@ class User(UserMixin, Base):
     def incomplete_evals(self):
         incomplete_evals = [
             eval for eval in self.evals
-            if eval.response is None or eval.feedback is None
+            if eval.review is None or eval.feedback is None
         ]
 
         return incomplete_evals
@@ -87,7 +87,7 @@ class Cohort(Base):
     name = Column(String(64), nullable=False)
     duration = Column(SmallInteger, nullable=False)
     start_date = Column(DateTime, nullable=False)
-    questionnaire = Column(JSON, nullable=False)  # rename to review_schema, nullable
+    review_schema = Column(JSON, nullable=True)
     feedback_schema = Column(JSON, nullable=True)
 
     enrolments = relationship(
@@ -113,7 +113,7 @@ class Eval(Base):
     evaluatee_id = Column(BigInteger, ForeignKey('user.id'), nullable=False)
     cohort_id = Column(SmallInteger, ForeignKey('cohort.id'), nullable=False)
     date = Column(Date, nullable=False)
-    response = Column(JSON, nullable=True)  # rename to review
+    review = Column(JSON, nullable=True)
     feedback = Column(JSON, nullable=True)
 
     evaluator = relationship(

@@ -39,8 +39,8 @@ def discussions_post(id):
     if eval is None:
         abort(404)
 
-    if eval.response is None:
-        eval.response = request.form
+    if eval.review is None:
+        eval.review = request.form
     else:
         eval.feedback = request.form
 
