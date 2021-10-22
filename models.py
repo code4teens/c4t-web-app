@@ -71,8 +71,8 @@ class Cohort(Base):
     name = Column(String(64), nullable=False)
     duration = Column(SmallInteger, nullable=False)
     start_date = Column(DateTime, nullable=False)
-    questionnaire = Column(JSON, nullable=False)
-    feedback = Column(JSON, nullable=False)
+    questionnaire = Column(JSON, nullable=False)  # rename to review_schema, nullable
+    feedback_schema = Column(JSON, nullable=True)
 
     enrolments = relationship(
         'Enrolment', back_populates='cohort', order_by='Enrolment.id'
@@ -97,7 +97,7 @@ class Eval(Base):
     evaluatee_id = Column(BigInteger, ForeignKey('user.id'), nullable=False)
     cohort_id = Column(SmallInteger, ForeignKey('cohort.id'), nullable=False)
     date = Column(Date, nullable=False)
-    response = Column(JSON, nullable=True)
+    response = Column(JSON, nullable=True)  # rename to review
     feedback = Column(JSON, nullable=True)
 
     evaluator = relationship(

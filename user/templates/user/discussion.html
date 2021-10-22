@@ -125,7 +125,8 @@
   {% if (eval.response is not none and eval.feedback is not none) or
   (eval.response is not none and eval.feedback is none and current_user.id ==
   eval.evaluatee.id) %}
-  {% for key, value in eval.cohort.feedback.get('d' ~ eval.day).items() %}
+  {% for key, value in eval.cohort.feedback_schema.get('d' ~ eval.day).items()
+  %}
   <div class="mb-3">
     <p class="mb-1">{{ key|upper }}. {{ value.get('title') }}</p>
     {% for option in value.options %}
