@@ -50,6 +50,22 @@ class User(UserMixin, Base):
         order_by='Eval.id'
     )
 
+    @hybridproperty
+    def evals(self):
+        evals = self.evals_evaluator + self.evals_evaluatee
+        evals.sort(key=lambda x: x.id)
+
+        return evals
+
+    @hybridproperty
+    def incomplete_evals(self):
+        incomplete_evals = [
+            eval for eval in self.evals
+            if eval.response is None or eval.feedback is None
+        ]
+
+        return incomplete_evals
+
 
 class Bot(Base):
     __tablename__ = 'bot'

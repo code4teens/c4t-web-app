@@ -20,7 +20,7 @@ def profile(id):
 @user.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('dashboard.html', user=current_user)
+    return render_template('dashboard.html')
 
 
 @user.route('/discussions/<int:id>')

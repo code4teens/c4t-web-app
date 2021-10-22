@@ -1,81 +1,85 @@
 {% extends 'base.html' %}
+
 {% set active_page = 'dashboard' %}
+
 {% block description %}
 <meta name="description" content="Dashboard">
 {% endblock %}
+
 {% block title %}Dashboard{% endblock %}
+
 {% block content %}
 <div class="container py-4" style="max-width: 960px;">
-  <h3 class="pb-3 mb-4 border-bottom">{{ user.enrolments[0].cohort.name }}</h3>
+  <h3 class="pb-3 mb-4 border-bottom">{{ current_user.enrolments[0].cohort.name
+    }}</h3>
+
   <h4>To-Do List</h4>
+
   <div class="list-group mb-4">
+    {% for eval in current_user.incomplete_evals %}
     <div class="list-group-item">
       <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">Day 1</h5>
-        <small>3 days ago</small>
+        <h5 class="mb-1">Day {{ eval.day }}</h5>
+        <small>x days ago</small>
       </div>
-      <p class="mb-1">Review Bunyod's code.</p>
-      <a href="">#0030</a>
+      {% if eval.response is none %}
+      {% if eval.evaluator.id == current_user.id %}
+      <p class="mb-1">Review {{ eval.evaluatee.display_name }}'s code.</p>
+      {% else %}
+      <p class="mb-1">Remind {{ eval.evaluator.display_name }} to review your
+        code.</p>
+      {% endif %}
+      {% else %}
+      {% if eval.evaluatee.id == current_user.id %}
+      <p class="mb-1">Feedback {{ eval.evaluator.display_name }}'s review.</p>
+      {% else %}
+      <p class="mb-1">Remind {{ eval.evaluatee.display_name }} to submit their
+        feedback.</p>
+      {% endif %}
+      {% endif %}
+      <a href="/discussions/{{ eval.id }}">#{{ '%04d' % eval.id }}</a>
     </div>
-    <div class="list-group-item">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">Day 2</h5>
-        <small>2 days ago</small>
-      </div>
-      <p class="mb-1">Feedback Yilin's review.</p>
-      <a href="">#0042</a>
-    </div>
-    <div class="list-group-item">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">Day 3</h5>
-        <small>1 day ago</small>
-      </div>
-      <p class="mb-1">Get code reviewed by Prag.</p>
-      <a href="">#0069</a>
-    </div>
+    {% endfor %}
   </div>
+
   <h4>Overview</h4>
-  <table class="table table-responsive-sm table-striped table-hover text-center">
-    <thead>
-      <tr>
-        <th scope="col">Day</th>
-        <th scope="col">Discussion</th>
-        <th scope="col">Reviewer</th>
-        <th scope="col">Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>
-          <a href="">#0024</a>
-        </td>
-        <td>Bohchu</td>
-        <td>
-          <img src="/static/check-lg.svg" alt="" width="20" height="20">
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>
-          <a href="">#0042</a>
-        </td>
-        <td>Yilin</td>
-        <td>
-          <img src="/static/x-lg.svg" alt="" width="20" height="20">
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>
-          <a href="">#0069</a>
-        </td>
-        <td>Prag</td>
-        <td>
-          <img src="/static/x-lg.svg" alt="" width="20" height="20">
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
+  <div class="mb-3">
+    <table
+      class="table table-responsive-sm table-striped table-hover text-center mb-1">
+      <thead>
+        <tr>
+          <th scope="col">Day</th>
+          <th scope="col">Discussion</th>
+          <th scope="col">Peer</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for eval in current_user.evals %}
+        <tr>
+          <th scope="row">{{ eval.day }}</th>
+          <td>
+            <a href="/discussions/{{ eval.id }}">#{{ '%04d' % eval.id }}</a>
+          </td>
+          {% if eval.evaluator.id == current_user.id %}
+          <td>{{ eval.evaluatee.display_name }}</td>
+          {% else %}
+          <td>{{ eval.evaluator.display_name }}</td>
+          {% endif %}
+          <td>
+            {% if eval.response is none or eval.feedback is none %}
+            <img src="/static/x-lg.svg" alt="" width="20" height="20">
+            {% else %}
+            <img src="/static/check-lg.svg" alt="" width="20" height="20">
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <small class="text-muted">Discussions are only marked as completed when
+      feedback is submitted.</small>
+  </div>
 </div>
 {% endblock %}
