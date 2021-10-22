@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
+
 {% block title %}Discussion{% endblock %}
+
 {% block content %}
-<form class="container py-4 needs-validation" method="post" action="/discussions/{{ eval.id }}" style="max-width: 960px;" novalidate>
+<form class="container py-4 needs-validation" method="post"
+  action="/discussions/{{ eval.id }}" style="max-width: 960px;" novalidate>
   <h3 class="pb-3 mb-3 border-bottom">Discussion #{{ '%04d' % eval.id }}</h3>
 
   <h4 class="mb-2">Overview</h4>
@@ -9,7 +12,8 @@
   <div class="row g-2">
     <div class="col-sm-7">
       <label class="form-label" for="cohort">Cohort</label>
-      <input class="form-control" id="cohort" value="{{ eval.cohort.name }}" readonly>
+      <input class="form-control" id="cohort" value="{{ eval.cohort.name }}"
+        readonly>
     </div>
 
     <div class="col-sm-2">
@@ -25,34 +29,42 @@
     {% if eval.evaluator.id != current_user.id %}
     <div class="col-12">
       <label class="form-label" for="name">Reviewer Name</label>
-      <input class="form-control" id="name" value="{{ eval.evaluator.display_name }}" readonly>
+      <input class="form-control" id="name"
+        value="{{ eval.evaluator.display_name }}" readonly>
     </div>
 
     <div class="col-sm-6">
       <label class="form-label" for="id">Reviewer ID</label>
-      <input class="form-control" id="id" value="{{ eval.evaluator.id }}" readonly>
+      <input class="form-control" id="id" value="{{ eval.evaluator.id }}"
+        readonly>
     </div>
 
     <div class="col-sm-6">
       <label class="form-label" for="username">Reviewer Username</label>
-      <input class="form-control" id="username" value="{{ eval.evaluator.name }}#{{ eval.evaluator.discriminator }}" readonly>
+      <input class="form-control" id="username"
+        value="{{ eval.evaluator.name }}#{{ eval.evaluator.discriminator }}"
+        readonly>
     </div>
     {% endif %}
 
     {% if eval.evaluatee.id != current_user.id %}
     <div class="col-12">
       <label class="form-label" for="name">Reviewee Name</label>
-      <input class="form-control" id="name" value="{{ eval.evaluatee.display_name }}" readonly>
+      <input class="form-control" id="name"
+        value="{{ eval.evaluatee.display_name }}" readonly>
     </div>
 
     <div class="col-sm-6">
       <label class="form-label" for="id">Reviewee ID</label>
-      <input class="form-control" id="id" value="{{ eval.evaluatee.id }}" readonly>
+      <input class="form-control" id="id" value="{{ eval.evaluatee.id }}"
+        readonly>
     </div>
 
     <div class="col-sm-6">
       <label class="form-label" for="username">Reviewee Username</label>
-      <input class="form-control" id="username" value="{{ eval.evaluatee.name }}#{{ eval.evaluatee.discriminator }}" readonly>
+      <input class="form-control" id="username"
+        value="{{ eval.evaluatee.name }}#{{ eval.evaluatee.discriminator }}"
+        readonly>
     </div>
     {% endif %}
   </div>
@@ -61,18 +73,24 @@
 
   <h4 class="mb-2">Review</h4>
 
-  {% if (eval.response is not none and eval.feedback is not none) or current_user.id == eval.evaluator.id %}
+  {% if (eval.response is not none and eval.feedback is not none) or
+  current_user.id == eval.evaluator.id %}
   {% for key, value in eval.cohort.questionnaire.get('d' ~ eval.day).items() %}
   <div class="mb-3">
     <p class="mb-1">{{ key|upper }}. {{ value.get('title') }}</p>
     {% for option in value.options %}
     <div class="form-check">
       {% if eval.response is none %}
-      <input class="form-check-input" id="{{ key }}-{{ option|lower }}" name="{{ key }}" type="radio" value="{{ option }}" {{ 'checked' if loop.index == 1 }} required>
+      <input class="form-check-input" id="{{ key }}-{{ option|lower }}"
+        name="{{ key }}" type="radio" value="{{ option }}" {{ 'checked' if
+        loop.index==1 }} required>
       {% else %}
-      <input class="form-check-input" id="{{ key }}-{{ option|lower }}" type="radio" value="{{ option }}" {{ 'checked' if eval.response.get(key) == option else 'disabled' }}>
+      <input class="form-check-input" id="{{ key }}-{{ option|lower }}"
+        type="radio" value="{{ option }}" {{ 'checked' if
+        eval.response.get(key)==option else 'disabled' }}>
       {% endif %}
-      <label class="form-check-label" for="{{ key }}-{{ option|lower }}">{{ option|capitalize }}</label>
+      <label class="form-check-label" for="{{ key }}-{{ option|lower }}">{{
+        option|capitalize }}</label>
     </div>
     {% endfor %}
   </div>
@@ -81,36 +99,48 @@
   <div class="mb-3">
     <label class="form-label" for="comments">Comments</label>
     {% if eval.response is none %}
-    <textarea class="form-control" id="comments" name="comments" placeholder="Write something..." minlength="10" maxlength="500" required></textarea>
+    <textarea class="form-control" id="comments" name="comments"
+      placeholder="Write something..." rows="5" minlength="10" maxlength="500"
+      required></textarea>
     {% else %}
-    <textarea class="form-control" id="comments" disabled>{{ eval.response.get('comments') }}</textarea>
+    <textarea class="form-control" id="comments" rows="5"
+      readonly>{{ eval.response.get('comments') }}</textarea>
     {% endif %}
-    <small class="text-muted">Comments must be between 10-500 characters.</small>
+    <small class="text-muted">Comments must be between 10-500
+      characters.</small>
   </div>
   {% elif eval.response is none %}
   <p>{{ eval.evaluator.display_name }} has yet to review.</p>
   {% elif current_user.id == eval.evaluatee.id %}
-  <p>Please complete below feedback to see {{ eval.evaluator.display_name }}'s review.</p>
+  <p>Please complete below feedback to see {{ eval.evaluator.display_name }}'s
+    review.</p>
   {% else %}
-  <p>{{ eval.evaluatee.display_name }} has yet to leave their feedback.</p>
+  <p>Section temporarily hidden.</p>
   {% endif %}
 
   <hr class="my-4">
 
   <h4 class="mb-2">Feedback</h4>
 
-  {% if (eval.response is not none and eval.feedback is not none) or (eval.response is not none and eval.feedback is none and current_user.id == eval.evaluatee.id) %}
+  {% if (eval.response is not none and eval.feedback is not none) or
+  (eval.response is not none and eval.feedback is none and current_user.id ==
+  eval.evaluatee.id) %}
   {% for key, value in eval.cohort.feedback.get('d' ~ eval.day).items() %}
   <div class="mb-3">
     <p class="mb-1">{{ key|upper }}. {{ value.get('title') }}</p>
     {% for option in value.options %}
     <div class="form-check">
       {% if eval.feedback is none %}
-      <input class="form-check-input" id="{{ key }}-{{ option|lower }}" name="{{ key }}" type="radio" value="{{ option }}" {{ 'checked' if loop.index == 1 }} required>
+      <input class="form-check-input" id="{{ key }}-{{ option|lower }}"
+        name="{{ key }}" type="radio" value="{{ option }}" {{ 'checked' if
+        loop.index==1 }} required>
       {% else %}
-      <input class="form-check-input" id="{{ key }}-{{ option|lower }}" type="radio" value="{{ option }}" {{ 'checked' if eval.feedback.get(key) == option else 'disabled' }}>
+      <input class="form-check-input" id="{{ key }}-{{ option|lower }}"
+        type="radio" value="{{ option }}" {{ 'checked' if
+        eval.feedback.get(key)==option else 'disabled' }}>
       {% endif %}
-      <label class="form-check-label" for="{{ key }}-{{ option|lower }}">{{ option|capitalize }}</label>
+      <label class="form-check-label" for="{{ key }}-{{ option|lower }}">{{
+        option|capitalize }}</label>
     </div>
     {% endfor %}
   </div>
@@ -119,21 +149,25 @@
   <div class="mb-3">
     <label class="form-label" for="comments">Comments</label>
     {% if eval.feedback is none %}
-    <textarea class="form-control" id="comments" name="comments" placeholder="Write something..." minlength="10" maxlength="500" required></textarea>
+    <textarea class="form-control" id="comments" name="comments"
+      placeholder="Write something..." rows="5" minlength="10" maxlength="500"
+      required></textarea>
     {% else %}
-    <textarea class="form-control" id="comments" disabled>{{ eval.feedback.get('comments') }}</textarea>
+    <textarea class="form-control" id="comments" rows="5"
+      readonly>{{ eval.feedback.get('comments') }}</textarea>
     {% endif %}
-    <small class="text-muted">Comments must be between 10-500 characters.</small>
+    <small class="text-muted">Comments must be between 10-500
+      characters.</small>
   </div>
-  {% elif eval.response is none and current_user.id == eval.evaluator.id %}
-  <p>Please complete above review first.</p>
   {% elif eval.response is none %}
-  <p>{{ eval.evaluator.display_name }} has yet to review.</p>
+  <p>Section temporarily hidden.</p>
   {% else %}
   <p>{{ eval.evaluatee.display_name }} has yet to leave their feedback.</p>
   {% endif %}
 
-  {% if (eval.response is none and current_user.id == eval.evaluator.id) or (eval.response is not none and eval.feedback is none and current_user.id == eval.evaluatee.id) %}
+  {% if (eval.response is none and current_user.id == eval.evaluator.id) or
+  (eval.response is not none and eval.feedback is none and current_user.id ==
+  eval.evaluatee.id) %}
   <hr class="my-4">
 
   <button class="btn btn-primary w-100" type="submit">Submit</button>
@@ -141,20 +175,20 @@
 </form>
 <script>
   (function () {
-  'use strict'
-  var forms = document.querySelectorAll('.needs-validation')
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
 
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
 
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
 </script>
 {% endblock %}
