@@ -15,12 +15,15 @@
 
   <h4>To-Do List</h4>
 
+  {% if current_user.incomplete_evals|length == 0 %}
+  <p>You have no pending tasks.</p>
+  {% else %}
   <div class="list-group mb-4">
     {% for eval in current_user.incomplete_evals %}
     <div class="list-group-item">
       <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1">Day {{ eval.day }}</h5>
-        <small>x days ago</small>
+        <small>{{ eval.lapse }} day{{ 's' if eval.lapse != 1 }} ago</small>
       </div>
       {% if eval.review is none %}
       {% if eval.evaluator.id == current_user.id %}
@@ -41,9 +44,15 @@
     </div>
     {% endfor %}
   </div>
+  {% endif %}
+
+  <hr class="my-4">
 
   <h4>Overview</h4>
 
+  {% if current_user.evals|length == 0 %}
+  <p>Check again on Day 1.</p>
+  {% else %}
   <div class="mb-3">
     <table
       class="table table-responsive-sm table-striped table-hover text-center mb-1">
@@ -81,5 +90,6 @@
     <small class="text-muted">Discussions are only marked as completed when
       feedback is submitted.</small>
   </div>
+  {% endif %}
 </div>
 {% endblock %}

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask_login import UserMixin
 from sqlalchemy import (
     BigInteger,
@@ -15,6 +17,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import relationship
 from sqlalchemy.util.langhelpers import hybridproperty
 
+from config import tz
 from database import Base
 
 
@@ -127,3 +130,9 @@ class Eval(Base):
         delta = self.date - self.cohort.start_date
 
         return delta.days + 1
+
+    @hybridproperty
+    def lapse(self):
+        delta = datetime.now(tz).date() - self.date
+
+        return delta.days
