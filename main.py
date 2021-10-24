@@ -15,11 +15,6 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 
-@login_manager.unauthorized_handler
-def unauthorized():
-    abort(401)
-
-
 @login_manager.user_loader
 def load_user(id):
     return User.query.filter_by(id=id).one_or_none()
@@ -33,6 +28,36 @@ def index():
 @app.teardown_appcontext
 def close_session(exception=None):
     db_session.remove()
+
+
+@app.errorhandler(401)
+def unauthorised_401(e):
+    data = {
+        "status": 401,
+        "title": "Unauthorised",
+        "detail": "You must be logged in to view this resource."
+    }
+    return render_template('error.html', **data)
+
+
+@app.errorhandler(403)
+def forbidden_403(e):
+    data = {
+        "status": 403,
+        "title": "Forbidden",
+        "detail": "Insufficient permission to access resource."
+    }
+    return render_template('error.html', **data)
+
+
+@app.errorhandler(404)
+def not_found_404(e):
+    data = {
+        "status": 404,
+        "title": "Not Found",
+        "detail": "The requested resource could not be found."
+    }
+    return render_template('error.html', **data)
 
 
 if __name__ == '__main__':

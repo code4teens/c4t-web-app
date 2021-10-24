@@ -22,12 +22,12 @@ def profile(id):
 def dashboard(id):
     cohort = Cohort.query.filter_by(id=id).one_or_none()
 
-    if cohort.id in [
+    if cohort is None or cohort.id not in [
         enrolment.cohort.id for enrolment in current_user.enrolments
     ]:
-        return render_template('dashboard.html', cohort=cohort)
+        abort(404)
     else:
-        abort(403)
+        return render_template('dashboard.html', cohort=cohort)
 
 
 @user.route('/discussions/<int:id>')
@@ -41,6 +41,7 @@ def discussions_get(id):
 
 
 @user.route('/discussions/<int:id>', methods=['POST'])
+@login_required
 def discussions_post(id):
     eval = Eval.query.filter_by(id=id).one_or_none()
     if eval is None:
