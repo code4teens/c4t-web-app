@@ -15,7 +15,7 @@ from sqlalchemy import (
     String
 )
 from sqlalchemy.orm import relationship
-from sqlalchemy.util.langhelpers import hybridproperty
+from sqlalchemy.util.langhelpers import hybridmethod, hybridproperty
 
 from config import tz
 from database import Base
@@ -53,17 +53,20 @@ class User(UserMixin, Base):
         order_by='Eval.id'
     )
 
-    @hybridproperty
-    def evals(self):
+    @hybridmethod
+    def evals(self, cohort_id):
         evals = self.evals_evaluator + self.evals_evaluatee
         evals.sort(key=lambda x: x.id)
+        filtered_evals = list(
+            filter(lambda x: x.cohort_id == cohort_id, evals)
+        )
 
-        return evals
+        return filtered_evals
 
-    @hybridproperty
-    def incomplete_evals(self):
+    @hybridmethod
+    def incomplete_evals(self, cohort_id):
         incomplete_evals = [
-            eval for eval in self.evals
+            eval for eval in self.evals(cohort_id)
             if eval.review is None or eval.feedback is None
         ]
 

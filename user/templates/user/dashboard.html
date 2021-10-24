@@ -10,16 +10,28 @@
 
 {% block content %}
 <div class="container py-4" style="max-width: 960px;">
-  <h3 class="pb-3 mb-4 border-bottom">{{ current_user.enrolments[0].cohort.name
-    }}</h3>
+  <h3 class="pb-3 mb-4 border-bottom">{{ cohort.name }}</h3>
+
+  {% if current_user.enrolments|length > 1 %}
+  <select class="form-select form-select-sm mb-4"
+    onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+    <option selected>{{ cohort.name }}</option>
+    {% for enrolment in current_user.enrolments %}
+    {% if enrolment.cohort.id != cohort.id %}
+    <option value="{{ url_for('user.dashboard', id=enrolment.cohort.id) }}">{{
+      enrolment.cohort.name }}</option>
+    {% endif %}
+    {% endfor %}
+  </select>
+  {% endif %}
 
   <h4>To-Do List</h4>
 
-  {% if current_user.incomplete_evals|length == 0 %}
+  {% if current_user.incomplete_evals(cohort.id)|length == 0 %}
   <p>You have no pending tasks.</p>
   {% else %}
   <div class="list-group mb-4">
-    {% for eval in current_user.incomplete_evals %}
+    {% for eval in current_user.incomplete_evals(cohort.id) %}
     <div class="list-group-item">
       <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1">Day {{ eval.day }}</h5>
@@ -50,7 +62,7 @@
 
   <h4>Overview</h4>
 
-  {% if current_user.evals|length == 0 %}
+  {% if current_user.evals(cohort.id)|length == 0 %}
   <p>Check again on Day 1.</p>
   {% else %}
   <div class="mb-3">
@@ -65,7 +77,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for eval in current_user.evals %}
+        {% for eval in current_user.evals(cohort.id) %}
         <tr>
           <th scope="row">{{ eval.day }}</th>
           <td>

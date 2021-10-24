@@ -2,7 +2,7 @@ from flask import abort, Blueprint, render_template, request
 from flask_login import current_user, login_required
 
 from database import db_session
-from models import Eval, User
+from models import Cohort, Eval, User
 
 user = Blueprint('user', __name__, template_folder='templates/user')
 
@@ -17,10 +17,17 @@ def profile(id):
     return render_template('profile.html', user=user)
 
 
-@user.route('/dashboard')
+@user.route('/dashboard/<int:id>')
 @login_required
-def dashboard():
-    return render_template('dashboard.html')
+def dashboard(id):
+    cohort = Cohort.query.filter_by(id=id).one_or_none()
+
+    if cohort.id in [
+        enrolment.cohort.id for enrolment in current_user.enrolments
+    ]:
+        return render_template('dashboard.html', cohort=cohort)
+    else:
+        abort(403)
 
 
 @user.route('/discussions/<int:id>')

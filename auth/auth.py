@@ -11,7 +11,9 @@ auth = Blueprint('auth', __name__, template_folder='templates/auth')
 @auth.route('/login')
 def login_get():
     if current_user.is_authenticated:
-        return redirect(url_for('user.dashboard', id=current_user.id))
+        return redirect(url_for(
+            'user.dashboard', id=current_user.enrolments[-1].cohort.id
+        ))
 
     return render_template('login.html')
 
@@ -33,7 +35,9 @@ def login_post():
     ):
         login_user(user)
 
-        return redirect(url_for('user.dashboard'))
+        return redirect(url_for(
+            'user.dashboard', id=current_user.enrolments[-1].cohort.id
+        ))
     else:
         flash('Wrong password')
 
@@ -69,7 +73,9 @@ def first_login_post():
         db_session.commit()
         login_user(user)
 
-        return redirect(url_for('user.dashboard'))
+        return redirect(url_for(
+            'user.dashboard', id=current_user.enrolments[-1].cohort.id
+        ))
 
     return render_template('first_login.html')
 
