@@ -7,7 +7,8 @@
 {% endblock %}
 
 {% block style %}
-<link href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css"
+  rel="stylesheet">
 {% endblock %}
 
 {% block title %}Admin{% endblock %}
@@ -18,7 +19,9 @@
 
   <h4 class="mb-3">Discussions</h4>
 
-  <table class="table table-bordered table-striped table-hover text-center w-100" id="dataTable">
+  <table
+    class="table table-bordered table-striped table-hover text-center w-100"
+    id="dataTable">
     <thead>
       <tr>
         <th scope="col">Cohort</th>
@@ -47,14 +50,17 @@
         </td>
         <td class="visually-hidden">discussion_id:{{ eval.id }}</td>
         <td>
-          <a href="/dashboard/{{ eval.evaluator.id }}/{{ eval.cohort.id }}">{{ eval.evaluator.display_name }}</a>
+          <a href="/dashboard/{{ eval.evaluator.id }}/{{ eval.cohort.id }}">{{
+            eval.evaluator.display_name }}</a>
         </td>
         <td class="visually-hidden">reviewer_id:{{ eval.evaluator.id }}</td>
         <td>
-          <a href="/dashboard/{{ eval.evaluatee.id }}/{{ eval.cohort.id }}">{{ eval.evaluatee.display_name }}</a>
+          <a href="/dashboard/{{ eval.evaluatee.id }}/{{ eval.cohort.id }}">{{
+            eval.evaluatee.display_name }}</a>
         </td>
         <td class="visually-hidden">reviewee_id:{{ eval.evaluatee.id }}</td>
-        <td class="visually-hidden">status:{{ 'ok' if eval.is_complete else 'ko' }}</td>
+        <td class="visually-hidden">status:{{ 'ok' if eval.is_complete else 'ko'
+          }}</td>
         <td>
           {% if eval.is_complete %}
           <span class="text-success">OK</span>
@@ -67,11 +73,14 @@
     </tbody>
   </table>
 </div>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+<script type="text/javascript"
+  src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript"
+  src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript"
+  src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 <script>
-  $(document).ready(function() {
+  $(document).ready(function () {
     $('#dataTable').DataTable({
       "scrollX": true
     });
