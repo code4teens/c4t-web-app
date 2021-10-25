@@ -18,63 +18,63 @@
 
   <h4 class="mb-3">Discussions</h4>
 
-  <div class="table-responsive-sm">
-    <table class="table table-bordered table-striped table-hover text-center dataTable" id="dataTable">
-      <thead>
-        <tr>
-          <th scope="col">Cohort</th>
-          <th class="visually-hidden" scope="col">Cohort ID</th>
-          <th scope="col">Day</th>
-          <th class="visually-hidden" scope="col">Day</th>
-          <th scope="col">Discussion</th>
-          <th class="visually-hidden" scope="col">Discussion</th>
-          <th scope="col">Reviewer</th>
-          <th class="visually-hidden" scope="col">Reviewer ID</th>
-          <th scope="col">Reviewee</th>
-          <th class="visually-hidden" scope="col">Reviewee ID</th>
-          <th class="visually-hidden" scope="col">Status</th>
-          <th scope="col">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for eval in evals %}
-        <tr>
-          <td>{{ eval.cohort.nickname }}</td>
-          <td class="visually-hidden">cohort_id:{{ eval.cohort.id }}</td>
-          <td>{{ eval.day }}</td>
-          <td class="visually-hidden">day:{{ eval.day }}</td>
-          <td>
-            <a href="/discussions/{{ eval.id }}">#{{ '%04d' % eval.id }}</a>
-          </td>
-          <td class="visually-hidden">discussion_id:{{ eval.id }}</td>
-          <td>
-            <a href="/dashboard/{{ eval.evaluator.id }}/{{ eval.cohort.id }}">{{ eval.evaluator.display_name }}</a>
-          </td>
-          <td class="visually-hidden">reviewer_id:{{ eval.evaluator.id }}</td>
-          <td>
-            <a href="/dashboard/{{ eval.evaluatee.id }}/{{ eval.cohort.id }}">{{ eval.evaluatee.display_name }}</a>
-          </td>
-          <td class="visually-hidden">reviewee_id:{{ eval.evaluatee.id }}</td>
-          <td class="visually-hidden">status:{{ 'ok' if eval.is_complete else 'ko' }}</td>
-          <td>
-            {% if eval.is_complete %}
-            <span class="text-success">OK</span>
-            {% else %}
-            <span class="text-danger">KO</span>
-            {% endif %}
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+  <table class="table table-bordered table-striped table-hover text-center w-100" id="dataTable">
+    <thead>
+      <tr>
+        <th scope="col">Cohort</th>
+        <th class="visually-hidden" scope="col">Cohort ID</th>
+        <th scope="col">Day</th>
+        <th class="visually-hidden" scope="col">Day</th>
+        <th scope="col">Discussion</th>
+        <th class="visually-hidden" scope="col">Discussion</th>
+        <th scope="col">Reviewer</th>
+        <th class="visually-hidden" scope="col">Reviewer ID</th>
+        <th scope="col">Reviewee</th>
+        <th class="visually-hidden" scope="col">Reviewee ID</th>
+        <th class="visually-hidden" scope="col">Status</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for eval in evals %}
+      <tr>
+        <td>{{ eval.cohort.nickname }}</td>
+        <td class="visually-hidden">cohort_id:{{ eval.cohort.id }}</td>
+        <td>{{ eval.day }}</td>
+        <td class="visually-hidden">day:{{ eval.day }}</td>
+        <td>
+          <a href="/discussions/{{ eval.id }}">#{{ '%04d' % eval.id }}</a>
+        </td>
+        <td class="visually-hidden">discussion_id:{{ eval.id }}</td>
+        <td>
+          <a href="/dashboard/{{ eval.evaluator.id }}/{{ eval.cohort.id }}">{{ eval.evaluator.display_name }}</a>
+        </td>
+        <td class="visually-hidden">reviewer_id:{{ eval.evaluator.id }}</td>
+        <td>
+          <a href="/dashboard/{{ eval.evaluatee.id }}/{{ eval.cohort.id }}">{{ eval.evaluatee.display_name }}</a>
+        </td>
+        <td class="visually-hidden">reviewee_id:{{ eval.evaluatee.id }}</td>
+        <td class="visually-hidden">status:{{ 'ok' if eval.is_complete else 'ko' }}</td>
+        <td>
+          {% if eval.is_complete %}
+          <span class="text-success">OK</span>
+          {% else %}
+          <span class="text-danger">KO</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 <script>
   $(document).ready(function() {
-    $('#dataTable').DataTable();
+    $('#dataTable').DataTable({
+      "scrollX": true
+    });
   });
 </script>
 {% endblock %}
