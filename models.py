@@ -90,7 +90,8 @@ class Bot(Base):
 class Cohort(Base):
     __tablename__ = 'cohort'
     id = Column(BigInteger, primary_key=True)
-    name = Column(String(64), nullable=False)
+    name = Column(String(32), nullable=False)
+    nickname = Column(String(16), nullable=False)
     duration = Column(SmallInteger, nullable=False)
     start_date = Column(DateTime, nullable=False)
     review_schema = Column(JSON, nullable=True)
@@ -139,3 +140,10 @@ class Eval(Base):
         delta = datetime.now(tz).date() - self.date
 
         return delta.days
+
+    @hybridproperty
+    def is_complete(self):
+        if self.review is None or self.feedback is None:
+            return False
+
+        return True

@@ -22,6 +22,13 @@ def admin_or_owner_only(func):
     return decorated_view
 
 
+@user.route('/admin')
+def admin():
+    evals = Eval.query.all()
+
+    return render_template('admin.html', evals=evals)
+
+
 @user.route('/profile/<int:id>')
 @login_required
 def profile(id):
