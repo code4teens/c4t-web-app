@@ -65,14 +65,14 @@
   {% if user.evals(cohort.id)|length == 0 %}
   <p>Check again on Day 1.</p>
   {% else %}
-  <div class="mb-3">
-    <table
-      class="table table-responsive-sm table-striped table-hover text-center mb-1">
+  <div class="table-responsive-sm">
+    <table class="table table-striped table-hover text-center mb-1">
       <thead>
         <tr>
           <th scope="col">Day</th>
           <th scope="col">Discussion</th>
-          <th scope="col">Peer</th>
+          <th scope="col">Reviewer</th>
+          <th scope="col">Reviewee</th>
           <th scope="col">Status</th>
         </tr>
       </thead>
@@ -83,16 +83,15 @@
           <td>
             <a href="/discussions/{{ eval.id }}">#{{ '%04d' % eval.id }}</a>
           </td>
-          {% if eval.evaluator.id == user.id %}
-          <td>{{ eval.evaluatee.display_name }}</td>
-          {% else %}
-          <td>{{ eval.evaluator.display_name }}</td>
-          {% endif %}
+          <td>{{ '-' if eval.evaluator.id == user.id else
+            eval.evaluator.display_name }}</td>
+          <td>{{ '-' if eval.evaluatee.id == user.id else
+            eval.evaluatee.display_name }}</td>
           <td>
-            {% if eval.review is none or eval.feedback is none %}
-            <img src="/static/x-lg.svg" alt="" width="20" height="20">
-            {% else %}
+            {% if eval.is_complete %}
             <img src="/static/check-lg.svg" alt="" width="20" height="20">
+            {% else %}
+            <img src="/static/x-lg.svg" alt="" width="20" height="20">
             {% endif %}
           </td>
         </tr>
