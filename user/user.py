@@ -1,3 +1,5 @@
+from functools import wraps
+
 from flask import abort, Blueprint, render_template, request
 from flask_login import current_user, login_required
 
@@ -5,6 +7,19 @@ from database import db_session
 from models import Cohort, Eval, User
 
 user = Blueprint('user', __name__, template_folder='templates/user')
+
+
+def admin_or_owner_only(func):
+    @wraps(func)
+    def decorated_view(*args, **kwargs):
+        if not current_user.is_authenticated:
+            abort(401)
+        elif not current_user.is_admin \
+                and kwargs.get('user_id') != current_user.id:
+            abort(403)
+        else:
+            return func(*args, **kwargs)
+    return decorated_view
 
 
 @user.route('/profile/<int:id>')
@@ -17,17 +32,18 @@ def profile(id):
     return render_template('profile.html', user=user)
 
 
-@user.route('/dashboard/<int:id>')
-@login_required
-def dashboard(id):
-    cohort = Cohort.query.filter_by(id=id).one_or_none()
+@user.route('/dashboard/<int:user_id>/<int:cohort_id>')
+@admin_or_owner_only
+def dashboard(user_id, cohort_id):
+    user = User.query.filter_by(id=user_id).one_or_none()
+    cohort = Cohort.query.filter_by(id=cohort_id).one_or_none()
 
-    if cohort is None or cohort.id not in [
-        enrolment.cohort.id for enrolment in current_user.enrolments
+    if user is None or cohort is None or cohort.id not in [
+        enrolment.cohort.id for enrolment in user.enrolments
     ]:
         abort(404)
     else:
-        return render_template('dashboard.html', cohort=cohort)
+        return render_template('dashboard.html', user=user, cohort=cohort)
 
 
 @user.route('/discussions/<int:id>')

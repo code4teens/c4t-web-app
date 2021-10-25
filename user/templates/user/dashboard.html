@@ -12,14 +12,14 @@
 <div class="container py-4" style="max-width: 960px;">
   <h3 class="pb-3 mb-3 border-bottom">{{ cohort.name }}</h3>
 
-  {% if current_user.enrolments|length > 1 %}
+  {% if user.enrolments|length > 1 %}
   <select class="form-select form-select-sm mb-4"
     onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
     <option selected>{{ cohort.name }}</option>
-    {% for enrolment in current_user.enrolments %}
+    {% for enrolment in user.enrolments %}
     {% if enrolment.cohort.id != cohort.id %}
-    <option value="{{ url_for('user.dashboard', id=enrolment.cohort.id) }}">{{
-      enrolment.cohort.name }}</option>
+    <option value="/dashboard/{{ user.id }}/{{ enrolment.cohort.id }}">
+      {{ enrolment.cohort.name }}</option>
     {% endif %}
     {% endfor %}
   </select>
@@ -27,25 +27,25 @@
 
   <h4>To-Do List</h4>
 
-  {% if current_user.incomplete_evals(cohort.id)|length == 0 %}
+  {% if user.incomplete_evals(cohort.id)|length == 0 %}
   <p>You have no pending tasks.</p>
   {% else %}
   <div class="list-group mb-4">
-    {% for eval in current_user.incomplete_evals(cohort.id) %}
+    {% for eval in user.incomplete_evals(cohort.id) %}
     <div class="list-group-item">
       <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1">Day {{ eval.day }}</h5>
         <small>{{ eval.lapse }} day{{ 's' if eval.lapse != 1 }} ago</small>
       </div>
       {% if eval.review is none %}
-      {% if eval.evaluator.id == current_user.id %}
+      {% if eval.evaluator.id == user.id %}
       <p class="mb-1">Review {{ eval.evaluatee.display_name }}'s code.</p>
       {% else %}
       <p class="mb-1">Remind {{ eval.evaluator.display_name }} to review your
         code.</p>
       {% endif %}
       {% else %}
-      {% if eval.evaluatee.id == current_user.id %}
+      {% if eval.evaluatee.id == user.id %}
       <p class="mb-1">Feedback {{ eval.evaluator.display_name }}'s review.</p>
       {% else %}
       <p class="mb-1">Remind {{ eval.evaluatee.display_name }} to submit their
@@ -62,7 +62,7 @@
 
   <h4>Overview</h4>
 
-  {% if current_user.evals(cohort.id)|length == 0 %}
+  {% if user.evals(cohort.id)|length == 0 %}
   <p>Check again on Day 1.</p>
   {% else %}
   <div class="mb-3">
@@ -77,13 +77,13 @@
         </tr>
       </thead>
       <tbody>
-        {% for eval in current_user.evals(cohort.id) %}
+        {% for eval in user.evals(cohort.id) %}
         <tr>
           <th scope="row">{{ eval.day }}</th>
           <td>
             <a href="/discussions/{{ eval.id }}">#{{ '%04d' % eval.id }}</a>
           </td>
-          {% if eval.evaluator.id == current_user.id %}
+          {% if eval.evaluator.id == user.id %}
           <td>{{ eval.evaluatee.display_name }}</td>
           {% else %}
           <td>{{ eval.evaluator.display_name }}</td>
