@@ -9,6 +9,18 @@ from models import Cohort, Eval, User
 user = Blueprint('user', __name__, template_folder='templates/user')
 
 
+def admin_only(func):
+    @wraps(func)
+    def decorated_view(*args, **kwargs):
+        if not current_user.is_authenticated:
+            abort(401)
+        elif not current_user.is_admin:
+            abort(403)
+        else:
+            return func(*args, **kwargs)
+    return decorated_view
+
+
 def admin_or_owner_only(func):
     @wraps(func)
     def decorated_view(*args, **kwargs):
@@ -23,6 +35,7 @@ def admin_or_owner_only(func):
 
 
 @user.route('/admin')
+@admin_only
 def admin():
     evals = Eval.query.all()
 
