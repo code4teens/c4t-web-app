@@ -1,45 +1,51 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+
 {% block description %}
 <meta name="description" content="Welcome to Code4Teens">
 {% endblock %}
+
 {% block title %}Welcome{% endblock %}
+
 {% block content %}
 <div class="container py-4">
-  {% if current_user.is_authenticated %}<h3 class="pb-3 mb-3 border-bottom">Welcome, {{ current_user.display_name }}!</h3>
+  {% if current_user.is_authenticated %}
+  <h3 class="pb-3 mb-3 border-bottom">Welcome, {{ current_user.display_name }}!
+  </h3>
   {% else %}
   <h3 class="pb-3 mb-3 border-bottom">Welcome!</h3>
   {% endif %}
 
   <div class="p-5 mb-4 bg-light rounded-3">
     <div class="container-fluid py-5">
-      <h1 class="display-5 fw-bold">Code 4 Teens <span style="color: rgb(59, 133, 230)">Py</span><span style="color: rgb(240, 203, 41)">thon</span> Botcamp</h1>
-      <p class="col-md-8 fs-4">
-        Join a 9 day curriculum designed to wake the inner programmer for every
-        teenager! 
-      </p>
-      <button class="btn btn-primary btn-lg" type="button">
-        Register
-      </button>
+      <h1 class="display-5 fw-bold">Code4Teens <span
+          style="color: #306998;">Py</span><span
+          style="color: #ffd43b">thon</span> Botcamp</h1>
+      <p class="fs-4">Join our 9-day curriculum designed to wake the inner
+        programmer for every teenager!</p>
+      <a href="/">
+        <button class="btn btn-primary btn-lg" type="button">Register</button>
+      </a>
     </div>
   </div>
 
-  <div class="row align-items-md-stretch">
-    <div class="col-md-6">
+  <div class="row align-items-sm-stretch g-4">
+    <div class="col-sm-6">
       <div class="h-100 p-5 text-white bg-dark rounded-3">
         <h2>Created by 42KL</h2>
-        <p>
-          A tuition-free computer programming school with a peer-to-peer learning environment that doesn’t involve teachers and lectures.
-        </p>
-        <button onclick=" window.open('http://42kl.edu.my','_blank')" class="btn btn-outline-light" type="button">
-          Check out 42KL
-        </button>
+        <p>A tuition-free computer programming school with a peer-to-peer
+          learning environment that doesn’t involve teachers and lectures.</p>
+        <a href="https://42kl.edu.my/">
+          <button class="btn btn-outline-light" type="button">Check out
+            42KL</button>
+        </a>
       </div>
     </div>
-    <div class="col-md-6">
+
+    <div class="col-sm-6">
       <div class="h-100 p-5 bg-light border rounded-3">
         <h2>Teaching methodology</h2>
-        <p>
-          Code 4 Teens creates a unique peer-to-peer learning environment which encourages students to be proactive in their tasks and assignments.
+        <p>Code4Teens creates a unique peer-to-peer learning environment which
+          encourages students to be proactive in their tasks and assignments.
         </p>
       </div>
     </div>
