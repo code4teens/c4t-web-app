@@ -88,11 +88,11 @@ class Bot(Base):
 
 class Cohort(Base):
     __tablename__ = 'cohort'
-    id = Column(BigInteger, primary_key=True)
+    id = Column(BigInteger, primary_key=True, autoincrement=True)
     name = Column(String(32), nullable=False)
     nickname = Column(String(16), nullable=False)
     duration = Column(SmallInteger, nullable=False)
-    start_date = Column(DateTime, nullable=False)
+    start_date = Column(Date, nullable=False)
     review_schema = Column(JSON, nullable=True)
     feedback_schema = Column(JSON, nullable=True)
 
