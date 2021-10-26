@@ -1,33 +1,41 @@
 {% extends 'base.html' %}
+
 {% set active_page = 'profile' %}
+
 {% block description %}
 <meta name="description" content="Check out {{ user.display_name }}'s profile">
 {% endblock %}
+
 {% block title %}{{ user.display_name }}{% endblock %}
+
 {% block content %}
 <form class="container py-4" style="max-width: 960px;">
   <h3 class="pb-3 mb-3 border-bottom">Profile</h3>
 
   <div class="row g-2 mb-3">
     <div class="col-12">
-      <label for="name" class="form-label">Name</label>
-      <input class="form-control" id="name" value="{{ user.display_name }}" readonly>
+      <label class="form-label" for="name">Name</label>
+      <input class="form-control" id="name" value="{{ user.display_name }}"
+        readonly>
     </div>
 
     <div class="col-sm-6">
-      <label for="id" class="form-label">ID</label>
+      <label class="form-label" for="id">ID</label>
       <input class="form-control" id="id" value="{{ user.id }}" readonly>
     </div>
 
     <div class="col-sm-6">
-      <label for="username" class="form-label">Username</label>
-      <input class="form-control" id="username" value="{{ user.name }}#{{ user.discriminator }}" readonly>
+      <label class="form-label" for="username">Username</label>
+      <input class="form-control" id="username"
+        value="{{ user.name }}#{{ user.discriminator }}" readonly>
     </div>
 
     {% for enrolment in user.enrolments %}
     <div class="col-12">
-      <label for="cohort-{{ loop.index }}" class="form-label">Cohort {{ loop.index }}</label>
-      <input class="form-control" id="cohort-{{ loop.index }}" value="{{ enrolment.cohort.name }}" readonly>
+      <label class="form-label" for="cohort-{{ loop.index }}">Cohort {{
+        loop.index }}</label>
+      <input class="form-control" id="cohort-{{ loop.index }}"
+        value="{{ enrolment.cohort.name }}" readonly>
     </div>
     {% endfor %}
   </div>

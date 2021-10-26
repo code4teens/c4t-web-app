@@ -1,13 +1,18 @@
 {% extends 'base.html' %}
+
 {% block description %}
 <meta name="description" content="Log in to Code4Teens">
 {% endblock %}
+
 {% block title %}First-time login{% endblock %}
+
 {% block style %}
 <link href="/static/login.css" rel="stylesheet">
 {% endblock %}
+
 {% block content %}
-<form class="form-login container py-4" method="post" action="/first_login" style="max-width: 960px;">
+<form class="form-login container py-4" method="post" action="/first_login"
+  style="max-width: 960px;">
   <h3 class="pb-3 mb-3 border-bottom">First-time login</h3>
 
   {% with messages = get_flashed_messages() %}
@@ -20,19 +25,20 @@
 
   <div class="mb-3">
     <div class="form-floating">
-      <input type="text" class="form-control form-input-top" id="id" name="id" placeholder="id">
+      <input class="form-control form-input-top" type="text" id="id" name="id"
+        placeholder="id">
       <label for="id">ID</label>
     </div>
 
     <div class="form-floating">
-      <input type="password" class="form-control form-input-middle" id="password" name="password"
-        placeholder="password">
+      <input class="form-control form-input-middle" type="password"
+        id="password" name="password" placeholder="password">
       <label for="password">Password</label>
     </div>
 
     <div class="form-floating">
-      <input type="password" class="form-control form-input-bottom" id="confirm-password" name="confirm-password"
-        placeholder="password">
+      <input class="form-control form-input-bottom" type="password"
+        id="confirm-password" name="confirm-password" placeholder="password">
       <label for="confirm-password">Confirm password</label>
     </div>
   </div>
