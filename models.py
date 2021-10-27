@@ -88,7 +88,7 @@ class Bot(Base):
 
 class Cohort(Base):
     __tablename__ = 'cohort'
-    id = Column(BigInteger, primary_key=True, autoincrement=True)
+    id = Column(SmallInteger, primary_key=True, autoincrement=True)
     name = Column(String(32), nullable=False)
     nickname = Column(String(16), nullable=False)
     duration = Column(SmallInteger, nullable=False)
