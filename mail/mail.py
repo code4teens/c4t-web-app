@@ -8,7 +8,6 @@ def parse_email(email):
 
 	email = str(email)
 	email = email[2:-1]
-	print(email)
 	if (Email.query.filter_by(email=email).first()):
 		response["response"] = 400
 		response["message"] = "This email is already subscribed!"
