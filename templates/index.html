@@ -7,7 +7,7 @@
 {% block title %}Welcome{% endblock %}
 
 {% block content %}
-<div class="container py-4">
+<div class="container py-4">  
   {% if current_user.is_authenticated %}
   <h3 class="pb-3 mb-3 border-bottom">Welcome, {{ current_user.display_name }}!
   </h3>
@@ -47,6 +47,7 @@
         <p>Code4Teens creates a unique peer-to-peer learning environment which
           encourages students to be proactive in their tasks and assignments.
         </p>
+        <button class="btn btn-outline btn-info" data-toggle="modal" data-target="#Modal-MoreInfo">More Info</button>
       </div>
     </div>
   </div>
