@@ -111,6 +111,10 @@ class Enrolment(Base):
     user = relationship('User', back_populates='enrolments')
     cohort = relationship('Cohort', back_populates='enrolments')
 
+class Email(Base):
+    __tablename__ = 'email'
+    id = Column(SmallInteger, primary_key=True, autoincrement=True)
+    email = Column(String(64), nullable=False)
 
 class Eval(Base):
     __tablename__ = 'eval'

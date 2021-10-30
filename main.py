@@ -1,4 +1,4 @@
-from flask import abort, Flask, render_template
+from flask import abort, Flask, render_template, request
 from flask_login import LoginManager
 
 from auth import auth
@@ -6,6 +6,7 @@ from config import prod_config
 from database import db_session
 from models import User
 from user import user
+from mail.mail import parse_email
 
 app = Flask(__name__)
 app.config.from_object(prod_config)
@@ -24,6 +25,11 @@ def load_user(id):
 def index():
     return render_template('index.html')
 
+@app.route('/mail_submit', methods=['POST'])
+def mail_submit():
+    email=request.get_data()
+    data = parse_email(email)
+    return (data['message'], data['response'])
 
 @app.teardown_appcontext
 def close_session(exception=None):
@@ -58,7 +64,6 @@ def not_found_404(e):
         "detail": "The requested resource could not be found."
     }
     return render_template('error.html', **data)
-
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8080, debug=True)
