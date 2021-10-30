@@ -24,31 +24,31 @@
     id="dataTable">
     <thead>
       <tr>
+        <th scope="col">Discussion</th>
+        <th class="visually-hidden" scope="col">Discussion</th>
         <th scope="col">Cohort</th>
         <th class="visually-hidden" scope="col">Cohort ID</th>
         <th scope="col">Day</th>
         <th class="visually-hidden" scope="col">Day</th>
-        <th scope="col">Discussion</th>
-        <th class="visually-hidden" scope="col">Discussion</th>
         <th scope="col">Reviewer</th>
         <th class="visually-hidden" scope="col">Reviewer ID</th>
         <th scope="col">Reviewee</th>
         <th class="visually-hidden" scope="col">Reviewee ID</th>
-        <th class="visually-hidden" scope="col">Status</th>
         <th scope="col">Status</th>
+        <th class="visually-hidden" scope="col">Status</th>
       </tr>
     </thead>
     <tbody>
       {% for eval in evals %}
       <tr>
-        <td>{{ eval.cohort.nickname }}</td>
-        <td class="visually-hidden">cohort_id:{{ eval.cohort.id }}</td>
-        <td>{{ eval.day }}</td>
-        <td class="visually-hidden">day:{{ eval.day }}</td>
         <td>
           <a href="/discussions/{{ eval.id }}">#{{ '%04d' % eval.id }}</a>
         </td>
         <td class="visually-hidden">discussion_id:{{ eval.id }}</td>
+        <td>{{ eval.cohort.nickname }}</td>
+        <td class="visually-hidden">cohort_id:{{ eval.cohort.id }}</td>
+        <td>{{ eval.day }}</td>
+        <td class="visually-hidden">day:{{ eval.day }}</td>
         <td>
           <a href="/dashboard/{{ eval.evaluator.id }}/{{ eval.cohort.id }}">{{
             eval.evaluator.display_name }}</a>
@@ -59,8 +59,6 @@
             eval.evaluatee.display_name }}</a>
         </td>
         <td class="visually-hidden">reviewee_id:{{ eval.evaluatee.id }}</td>
-        <td class="visually-hidden">status:{{ 'ok' if eval.is_complete else 'ko'
-          }}</td>
         <td>
           {% if eval.is_complete %}
           <span class="text-success">OK</span>
@@ -68,6 +66,8 @@
           <span class="text-danger">KO</span>
           {% endif %}
         </td>
+        <td class="visually-hidden">status:{{ 'ok' if eval.is_complete else 'ko'
+          }}</td>
       </tr>
       {% endfor %}
     </tbody>
@@ -81,7 +81,7 @@
 <script
   src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 <script>
-  $(document).ready(function() {
+  $(document).ready(function () {
     $('#dataTable').DataTable({
       "scrollX": true
     });
