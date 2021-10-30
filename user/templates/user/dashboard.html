@@ -89,9 +89,9 @@
             eval.evaluatee.display_name }}</td>
           <td>
             {% if eval.is_complete %}
-            <img src="/static/check-lg.svg" alt="" width="20" height="20">
+            <span class="text-success">OK</span>
             {% else %}
-            <img src="/static/x-lg.svg" alt="" width="20" height="20">
+            <span class="text-danger">KO</span>
             {% endif %}
           </td>
         </tr>
