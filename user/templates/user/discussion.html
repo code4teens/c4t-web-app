@@ -29,42 +29,78 @@
     {% if eval.evaluator.id != current_user.id %}
     <div class="col-12">
       <label class="form-label" for="name">Reviewer Name</label>
-      <input class="form-control" id="name"
-        value="{{ eval.evaluator.display_name }}" readonly>
+      <div class="input-group">
+        <input class="form-control" id="name"
+          value="{{ eval.evaluator.display_name }}" readonly>
+        <button class="btn btn-outline-secondary" data-bs-toggle="tooltip"
+          type="button" onclick="copy(this)">
+          <i class="bi bi-clipboard"></i>
+        </button>
+      </div>
     </div>
 
     <div class="col-sm-6">
       <label class="form-label" for="id">Reviewer ID</label>
-      <input class="form-control" id="id" value="{{ eval.evaluator.id }}"
-        readonly>
+      <div class="input-group">
+        <input class="form-control" id="id" value="{{ eval.evaluator.id }}"
+          readonly>
+        <button class="btn btn-outline-secondary" data-bs-toggle="tooltip"
+          type="button" onclick="copy(this)">
+          <i class="bi bi-clipboard"></i>
+        </button>
+      </div>
     </div>
 
     <div class="col-sm-6">
       <label class="form-label" for="username">Reviewer Username</label>
-      <input class="form-control" id="username"
-        value="{{ eval.evaluator.name }}#{{ eval.evaluator.discriminator }}"
-        readonly>
+      <div class="input-group">
+        <input class="form-control" id="username"
+          value="{{ eval.evaluator.name }}#{{ eval.evaluator.discriminator }}"
+          readonly>
+        <button class="btn btn-outline-secondary" data-bs-toggle="tooltip"
+          type="button" onclick="copy(this)">
+          <i class="bi bi-clipboard"></i>
+        </button>
+      </div>
     </div>
     {% endif %}
 
     {% if eval.evaluatee.id != current_user.id %}
     <div class="col-12">
       <label class="form-label" for="name">Reviewee Name</label>
-      <input class="form-control" id="name"
-        value="{{ eval.evaluatee.display_name }}" readonly>
+      <div class="input-group">
+        <input class="form-control" id="name"
+          value="{{ eval.evaluatee.display_name }}" readonly>
+        <button class="btn btn-outline-secondary" data-bs-toggle="tooltip"
+          type="button" onclick="copy(this)">
+          <i class="bi bi-clipboard"></i>
+        </button>
+      </div>
     </div>
 
     <div class="col-sm-6">
       <label class="form-label" for="id">Reviewee ID</label>
-      <input class="form-control" id="id" value="{{ eval.evaluatee.id }}"
-        readonly>
+      <div class="input-group">
+        <input class="form-control" id="id" value="{{ eval.evaluatee.id }}"
+          readonly>
+        <button class="btn btn-outline-secondary" data-bs-toggle="tooltip"
+          type="button" onclick="copy(this)">
+          <i class="bi bi-clipboard"></i>
+        </button>
+      </div>
     </div>
 
     <div class="col-sm-6">
       <label class="form-label" for="username">Reviewee Username</label>
-      <input class="form-control" id="username"
-        value="{{ eval.evaluatee.name }}#{{ eval.evaluatee.discriminator }}"
-        readonly>
+      <div class="input-group">
+        <input class="form-control" id="username"
+          value="{{ eval.evaluatee.name }}#{{ eval.evaluatee.discriminator }}"
+          readonly>
+        <button class="btn btn-outline-secondary" data-bs-toggle="tooltip"
+          type="button" onclick="copy(this)">
+          <i class="bi bi-clipboard"></i>
+        </button>
+      </div>
     </div>
     {% endif %}
   </div>
@@ -174,6 +210,9 @@
   <button class="btn btn-primary w-100" type="submit">Submit</button>
   {% endif %}
 </form>
+{% endblock %}
+
+{% block script %}
 <script>
   (function () {
     'use strict'
@@ -192,4 +231,5 @@
       })
   })()
 </script>
+<script src="/static/copy.js"></script>
 {% endblock %}

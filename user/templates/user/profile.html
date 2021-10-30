@@ -15,19 +15,37 @@
   <div class="row g-2 mb-3">
     <div class="col-12">
       <label class="form-label" for="name">Name</label>
-      <input class="form-control" id="name" value="{{ user.display_name }}"
-        readonly>
+      <div class="input-group">
+        <input class="form-control" id="name" value="{{ user.display_name }}"
+          readonly>
+        <button class="btn btn-outline-secondary" data-bs-toggle="tooltip"
+          type="button" onclick="copy(this)">
+          <i class="bi bi-clipboard"></i>
+        </button>
+      </div>
     </div>
 
     <div class="col-sm-6">
       <label class="form-label" for="id">ID</label>
-      <input class="form-control" id="id" value="{{ user.id }}" readonly>
+      <div class="input-group">
+        <input class="form-control" id="id" value="{{ user.id }}" readonly>
+        <button class="btn btn-outline-secondary" data-bs-toggle="tooltip"
+          type="button" onclick="copy(this)">
+          <i class="bi bi-clipboard"></i>
+        </button>
+      </div>
     </div>
 
     <div class="col-sm-6">
       <label class="form-label" for="username">Username</label>
-      <input class="form-control" id="username"
-        value="{{ user.name }}#{{ user.discriminator }}" readonly>
+      <div class="input-group">
+        <input class="form-control" id="username"
+          value="{{ user.name }}#{{ user.discriminator }}" readonly>
+        <button class="btn btn-outline-secondary" data-bs-toggle="tooltip"
+          type="button" onclick="copy(this)">
+          <i class="bi bi-clipboard"></i>
+        </button>
+      </div>
     </div>
 
     {% for enrolment in user.enrolments %}
@@ -46,4 +64,8 @@
   </a>
   {% endif %}
 </form>
+{% endblock %}
+
+{% block script %}
+<script src="/static/copy.js"></script>
 {% endblock %}
