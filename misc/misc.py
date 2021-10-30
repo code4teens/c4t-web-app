@@ -4,7 +4,7 @@ from flask import Blueprint, request
 
 from database import db_session
 from models import Email
-from config import make_json_response
+from utils import make_json_response
 
 misc = Blueprint('misc', __name__, template_folder='templates/misc')
 

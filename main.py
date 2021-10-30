@@ -6,7 +6,7 @@ from database import db_session
 from misc import misc
 from models import User
 from user import user
-from config import prod_config
+from utils import prod_config
 
 app = Flask(__name__)
 app.config.from_object(prod_config)

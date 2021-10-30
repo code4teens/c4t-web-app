@@ -17,7 +17,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import relationship
 from sqlalchemy.util.langhelpers import hybridmethod, hybridproperty
 
-from config import tz
+from utils import tz
 from database import Base
 
 
