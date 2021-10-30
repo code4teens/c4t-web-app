@@ -17,8 +17,8 @@ from sqlalchemy import (
 from sqlalchemy.orm import relationship
 from sqlalchemy.util.langhelpers import hybridmethod, hybridproperty
 
-from utils import tz
 from database import Base
+from utils import tz
 
 
 class User(UserMixin, Base):
@@ -112,12 +112,6 @@ class Enrolment(Base):
     cohort = relationship('Cohort', back_populates='enrolments')
 
 
-class Email(Base):
-    __tablename__ = 'email'
-    id = Column(SmallInteger, primary_key=True, autoincrement=True)
-    email = Column(String(64), nullable=False)
-
-
 class Eval(Base):
     __tablename__ = 'eval'
     id = Column(SmallInteger, primary_key=True, autoincrement=True)
@@ -152,3 +146,10 @@ class Eval(Base):
             return False
 
         return True
+
+
+class Subscription(Base):
+    __tablename__ = 'subscription'
+    id = Column(SmallInteger, primary_key=True, autoincrement=True)
+    email = Column(String(64), nullable=False)
+    created_at = Column(DateTime, nullable=False, default=func.now())

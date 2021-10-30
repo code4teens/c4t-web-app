@@ -3,7 +3,7 @@ import re
 from flask import Blueprint, request
 
 from database import db_session
-from models import Email
+from models import Subscription
 from utils import make_json_response
 
 misc = Blueprint('misc', __name__, template_folder='templates/misc')
@@ -15,10 +15,11 @@ def subscribe():
     email = request.get_data().decode("utf-8")
 
     if re.fullmatch(regex, email):
-        existing_email = Email.query.filter_by(email=email).one_or_none()
+        existing_email = \
+            Subscription.query.filter_by(email=email).one_or_none()
 
         if existing_email is None:
-            mail = Email(email=email)
+            mail = Subscription(email=email)
             db_session.add(mail)
             db_session.commit()
 
