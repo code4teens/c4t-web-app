@@ -7,7 +7,7 @@
 {% block title %}Welcome{% endblock %}
 
 {% block content %}
-<div class="container py-4">  
+<div class="container py-4">
   {% if current_user.is_authenticated %}
   <h3 class="pb-3 mb-3 border-bottom">Welcome, {{ current_user.display_name }}!
   </h3>

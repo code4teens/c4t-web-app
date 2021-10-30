@@ -28,7 +28,6 @@ class User(UserMixin, Base):
     name = Column(String(64), nullable=False)
     discriminator = Column(String(4), nullable=False)
     display_name = Column(String(64), nullable=False)
-    cohort_id = Column(SmallInteger, ForeignKey('cohort.id'), nullable=True)
     xp = Column(Integer, nullable=False)
     is_admin = Column(Boolean, nullable=False, default=False)
     created_at = Column(DateTime, nullable=False, default=func.now())
@@ -89,11 +88,11 @@ class Bot(Base):
 
 class Cohort(Base):
     __tablename__ = 'cohort'
-    id = Column(BigInteger, primary_key=True)
+    id = Column(SmallInteger, primary_key=True, autoincrement=True)
     name = Column(String(32), nullable=False)
     nickname = Column(String(16), nullable=False)
     duration = Column(SmallInteger, nullable=False)
-    start_date = Column(DateTime, nullable=False)
+    start_date = Column(Date, nullable=False)
     review_schema = Column(JSON, nullable=True)
     feedback_schema = Column(JSON, nullable=True)
 
