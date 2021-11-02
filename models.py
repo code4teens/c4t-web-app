@@ -28,24 +28,28 @@ class User(UserMixin, Base):
     name = Column(String(64), nullable=False)
     discriminator = Column(String(4), nullable=False)
     display_name = Column(String(64), nullable=False)
-    xp = Column(Integer, nullable=False)
+    xp = Column(Integer, nullable=False, default=0)
     is_admin = Column(Boolean, nullable=False, default=False)
+    api_key = Column(String(43), nullable=True)
     created_at = Column(DateTime, nullable=False, default=func.now())
     last_updated = Column(DateTime, nullable=False, default=func.now())
 
     bots = relationship(
         'Bot', back_populates='user', order_by='Bot.created_at'
     )
+    channels = relationship(
+        'Channel', back_populates='user', order_by='Channel.created_at'
+    )
     enrolments = relationship(
         'Enrolment', back_populates='user', order_by='Enrolment.id'
     )
-    evals_evaluator = relationship(
+    evals_as_evaluator = relationship(
         'Eval',
         foreign_keys='Eval.evaluator_id',
         back_populates='evaluator',
         order_by='Eval.id'
     )
-    evals_evaluatee = relationship(
+    evals_as_evaluatee = relationship(
         'Eval',
         foreign_keys='Eval.evaluatee_id',
         back_populates='evaluatee',
@@ -54,7 +58,7 @@ class User(UserMixin, Base):
 
     @hybridmethod
     def evals(self, cohort_id):
-        evals = self.evals_evaluator + self.evals_evaluatee
+        evals = self.evals_as_evaluator + self.evals_as_evaluatee
         evals.sort(key=lambda x: x.id)
         filtered_evals = list(
             filter(lambda x: x.cohort_id == cohort_id, evals)
@@ -75,15 +79,30 @@ class User(UserMixin, Base):
 class Bot(Base):
     __tablename__ = 'bot'
     id = Column(BigInteger, primary_key=True)
-    name = Column(String(64), nullable=False)
-    discriminator = Column(String(4), nullable=False)
-    display_name = Column(String(64), nullable=False)
+    name = Column(String(64), nullable=True)
+    discriminator = Column(String(4), nullable=True)
+    display_name = Column(String(64), nullable=True)
     user_id = Column(BigInteger, ForeignKey('user.id'), nullable=False)
+    cohort_id = Column(SmallInteger, ForeignKey('cohort.id'), nullable=False)
     msg_id = Column(BigInteger, nullable=False)
     created_at = Column(DateTime, nullable=False, default=func.now())
     last_updated = Column(DateTime, nullable=False, default=func.now())
 
     user = relationship('User', back_populates='bots')
+    cohort = relationship('Cohort', back_populates='bots')
+
+
+class Channel(Base):
+    __tablename__ = 'channel'
+    id = Column(BigInteger, primary_key=True)
+    name = Column(String(64), nullable=False)
+    user_id = Column(BigInteger, ForeignKey('user.id'), nullable=False)
+    cohort_id = Column(SmallInteger, ForeignKey('cohort.id'), nullable=False)
+    created_at = Column(DateTime, nullable=False, default=func.now())
+    last_updated = Column(DateTime, nullable=False, default=func.now())
+
+    user = relationship('User', back_populates='channels')
+    cohort = relationship('Cohort', back_populates='channels')
 
 
 class Cohort(Base):
@@ -93,9 +112,16 @@ class Cohort(Base):
     nickname = Column(String(16), nullable=False)
     duration = Column(SmallInteger, nullable=False)
     start_date = Column(Date, nullable=False)
+    is_active = Column(Boolean, nullable=True)
     review_schema = Column(JSON, nullable=True)
     feedback_schema = Column(JSON, nullable=True)
 
+    bots = relationship(
+        'Bot', back_populates='cohort', order_by='Bot.created_at'
+    )
+    channels = relationship(
+        'Channel', back_populates='cohort', order_by='Channel.created_at'
+    )
     enrolments = relationship(
         'Enrolment', back_populates='cohort', order_by='Enrolment.id'
     )
@@ -123,9 +149,15 @@ class Eval(Base):
     feedback = Column(JSON, nullable=True)
 
     evaluator = relationship(
-        'User', foreign_keys=[evaluator_id], back_populates='evals_evaluator')
+        'User',
+        foreign_keys=[evaluator_id],
+        back_populates='evals_as_evaluator'
+    )
     evaluatee = relationship(
-        'User', foreign_keys=[evaluatee_id], back_populates='evals_evaluatee')
+        'User',
+        foreign_keys=[evaluatee_id],
+        back_populates='evals_as_evaluatee'
+    )
     cohort = relationship('Cohort', back_populates='evals')
 
     @hybridproperty
