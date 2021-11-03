@@ -55,7 +55,7 @@
       <label class="form-label" for="username">Reviewer Username</label>
       <div class="input-group">
         <input class="form-control" id="username"
-          value="{{ eval.evaluator.name }}#{{ eval.evaluator.discriminator }}"
+          value="{{ eval.evaluator.username }}"
           readonly>
         <button class="btn btn-outline-secondary" data-bs-toggle="tooltip"
           type="button" onclick="copy(this)">
@@ -94,7 +94,7 @@
       <label class="form-label" for="username">Reviewee Username</label>
       <div class="input-group">
         <input class="form-control" id="username"
-          value="{{ eval.evaluatee.name }}#{{ eval.evaluatee.discriminator }}"
+          value="{{ eval.evaluatee.username }}"
           readonly>
         <button class="btn btn-outline-secondary" data-bs-toggle="tooltip"
           type="button" onclick="copy(this)">

@@ -75,6 +75,12 @@ class User(UserMixin, Base):
 
         return incomplete_evals
 
+    @hybridproperty
+    def username(self):
+        username = f'{self.name}#{self.discriminator}'
+
+        return username
+
 
 class Bot(Base):
     __tablename__ = 'bot'
