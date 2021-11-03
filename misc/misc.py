@@ -4,7 +4,6 @@ from flask import Blueprint, request
 
 from database import db_session
 from models import Subscription
-from utils import make_json_response
 
 misc = Blueprint('misc', __name__, template_folder='templates/misc')
 
@@ -22,18 +21,26 @@ def subscribe():
             mail = Subscription(email=email)
             db_session.add(mail)
             db_session.commit()
+            data = {
+                'title': 'OK',
+                'status': 200,
+                'detail': 'Success'
+            }
 
-            title = 'OK'
-            detail = f'Success'
-
-            return make_json_response(title, 200, detail)
+            return data, 200
         else:
-            title = 'Conflict'
-            detail = f'Email already exists'
+            data = {
+                'title': 'Conflict',
+                'status': 409,
+                'detail': 'Email already exists'
+            }
 
-            return make_json_response(title, 409, detail)
+            return data, 409
     else:
-        title = 'Bad Request'
-        detail = f'Invalid email'
+        data = {
+            'title': 'Bad Request',
+            'status': 400,
+            'detail': 'Invalid email'
+        }
 
-        return make_json_response(title, 400, detail)
+        return data, 400
