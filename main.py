@@ -39,6 +39,7 @@ def unauthorised_401(e):
         "title": "Unauthorised",
         "detail": "You must be logged in to view this resource."
     }
+
     return render_template('error.html', **data)
 
 
@@ -49,6 +50,7 @@ def forbidden_403(e):
         "title": "Forbidden",
         "detail": "Insufficient permission to access resource."
     }
+
     return render_template('error.html', **data)
 
 
@@ -59,6 +61,7 @@ def not_found_404(e):
         "title": "Not Found",
         "detail": "The requested resource could not be found."
     }
+
     return render_template('error.html', **data)
 
 

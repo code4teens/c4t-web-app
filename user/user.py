@@ -18,6 +18,7 @@ def admin_only(func):
             abort(403)
         else:
             return func(*args, **kwargs)
+
     return decorated_view
 
 
@@ -31,6 +32,7 @@ def admin_or_owner_only(func):
             abort(403)
         else:
             return func(*args, **kwargs)
+
     return decorated_view
 
 
@@ -46,6 +48,7 @@ def admin():
 @login_required
 def profile(id):
     user = User.query.filter_by(id=id).one_or_none()
+
     if user is None:
         abort(404)
 
@@ -70,6 +73,7 @@ def dashboard(user_id, cohort_id):
 @login_required
 def discussions_get(id):
     eval = Eval.query.filter_by(id=id).one_or_none()
+
     if eval is None:
         abort(404)
 
@@ -80,6 +84,7 @@ def discussions_get(id):
 @login_required
 def discussions_post(id):
     eval = Eval.query.filter_by(id=id).one_or_none()
+
     if eval is None:
         abort(404)
 
