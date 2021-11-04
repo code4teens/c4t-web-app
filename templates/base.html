@@ -22,7 +22,7 @@
 
 <body class="d-flex flex-column h-100">
   <main class="flex-shrink-0 mb-5">
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="/"><img
             class="d-inline-block align-text-top me-1"
@@ -51,7 +51,7 @@
           </div>
           <div class="navbar-nav">
             {% if current_user.is_authenticated %}
-            <a class="nav-link pb-3 pe-sm-3 pb-sm-2{{ ' active' if active_page == 'profile' else '' }}"
+            <a class="nav-link pb-3 pe-md-3 pb-md-2{{ ' active' if active_page == 'profile' else '' }}"
               href="/profile/{{ current_user.id }}">{{ current_user.name }}</a>
             <a href="/logout"><button
                 class="btn btn-outline-danger form-control" type="button">Log
@@ -83,7 +83,7 @@
     </ul>
 
     <form
-      class="row row-cols-sm-auto g-3 justify-content-center align-items-center mb-3">
+      class="row row-cols-md-auto g-3 justify-content-center align-items-center mb-3">
       <div class="col-12 text-center">
         <span class="text-light">Subscribe to our mailing list!</span>
       </div>
