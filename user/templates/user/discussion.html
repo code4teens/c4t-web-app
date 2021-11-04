@@ -11,7 +11,7 @@
   action="/discussions/{{ eval.id }}" style="max-width: 960px;" novalidate>
   <h3 class="border-bottom mb-3 pb-3">Discussion #{{ '%04d' % eval.id }}</h3>
 
-  <h4 class="mb-2">Overview</h4>
+  <h4 class="mb-3">Overview</h4>
 
   <div class="row g-2">
     <div class="col-md-7">
@@ -111,7 +111,7 @@
 
   <hr class="my-4">
 
-  <h4 class="mb-2">Review</h4>
+  <h4 class="mb-3">Review</h4>
 
   {% if (eval.review is not none and eval.feedback is not none) or
   current_user.id == eval.evaluator.id or current_user.is_admin %}
@@ -160,7 +160,7 @@
 
   <hr class="my-4">
 
-  <h4 class="mb-2">Feedback</h4>
+  <h4 class="mb-3">Feedback</h4>
 
   {% if (eval.review is not none and eval.feedback is not none) or
   (eval.review is not none and eval.feedback is none and current_user.id ==

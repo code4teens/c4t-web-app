@@ -25,7 +25,7 @@
   </select>
   {% endif %}
 
-  <h4>To-Do List</h4>
+  <h4 class="mb-3">To-Do List</h4>
 
   {% if user.incomplete_evals(cohort.id)|length == 0 %}
   <p>You have no pending tasks.</p>
@@ -60,7 +60,7 @@
 
   <hr class="my-4">
 
-  <h4>Overview</h4>
+  <h4 class="mb-3">Overview</h4>
 
   {% if user.evals(cohort.id)|length == 0 %}
   <p>Check again later.</p>
