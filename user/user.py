@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from functools import wraps
 
 from flask import abort, Blueprint, render_template, request
@@ -5,6 +6,7 @@ from flask_login import current_user, login_required
 
 from database import db_session
 from models import Cohort, Eval, User
+from utils import tz
 
 user = Blueprint('user', __name__, template_folder='templates/user')
 
@@ -34,6 +36,16 @@ def admin_or_owner_only(func):
             return func(*args, **kwargs)
 
     return decorated_view
+
+
+@user.add_app_template_filter
+def is_past(date, day):
+    today = datetime.now(tz).date()
+
+    if today >= date + timedelta(days=day):
+        return True
+
+    return False
 
 
 @user.route('/admin')
@@ -97,3 +109,18 @@ def discussions_post(id):
     db_session.commit()
 
     return render_template('discussion.html', eval=eval)
+
+
+@user.route('/resources/<int:cohort_id>')
+@login_required
+def resources(cohort_id):
+    cohort = Cohort.query.filter_by(id=cohort_id).one_or_none()
+
+    if cohort is None:
+        abort(404)
+    elif cohort.id not in [
+        enrolment.cohort.id for enrolment in current_user.enrolments
+    ]:
+        abort(403)
+    else:
+        return render_template('resources.html', cohort=cohort)

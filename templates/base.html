@@ -43,6 +43,8 @@
             {% if current_user.is_authenticated %}
             <a class="nav-link{{ ' active' if active_page == 'dashboard' else '' }}"
               href="/dashboard/{{ current_user.id }}/{{ current_user.enrolments[-1].cohort.id }}">Dashboard</a>
+            <a class="nav-link{{ ' active' if active_page == 'resources' else '' }}"
+              href="/resources/{{ current_user.enrolments[-1].cohort_id }}">Resources</a>
             {% else %}
             <hr class="m-1">
             {% endif %}
