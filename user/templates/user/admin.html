@@ -15,7 +15,7 @@
 
 {% block content %}
 <div class="container py-4" style="max-width: 960px;">
-  <h3 class="pb-3 mb-3 border-bottom">Admin</h3>
+  <h3 class="border-bottom mb-3 pb-3">Admin</h3>
 
   <h4 class="mb-3">Discussions</h4>
 
@@ -30,6 +30,7 @@
         <th class="visually-hidden" scope="col">Cohort ID</th>
         <th scope="col">Day</th>
         <th class="visually-hidden" scope="col">Day</th>
+        <th class="visually-hidden" scope="col">Date</th>
         <th scope="col">Reviewer</th>
         <th class="visually-hidden" scope="col">Reviewer ID</th>
         <th scope="col">Reviewee</th>
@@ -49,6 +50,7 @@
         <td class="visually-hidden">cohort_id:{{ eval.cohort.id }}</td>
         <td>{{ eval.day }}</td>
         <td class="visually-hidden">day:{{ eval.day }}</td>
+        <td class="visually-hidden">date:{{ eval.date }}</td>
         <td>
           <a href="/dashboard/{{ eval.evaluator.id }}/{{ eval.cohort.id }}">{{
             eval.evaluator.display_name }}</a>

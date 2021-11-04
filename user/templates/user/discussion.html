@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 
+{% block description %}
+<meta name="description" content="Discussion #{{ '%04d' % eval.id }}">
+{% endblock %}
+
 {% block title %}Discussion{% endblock %}
 
 {% block content %}
 <form class="container py-4 needs-validation" method="post"
   action="/discussions/{{ eval.id }}" style="max-width: 960px;" novalidate>
-  <h3 class="pb-3 mb-3 border-bottom">Discussion #{{ '%04d' % eval.id }}</h3>
+  <h3 class="border-bottom mb-3 pb-3">Discussion #{{ '%04d' % eval.id }}</h3>
 
   <h4 class="mb-2">Overview</h4>
 
@@ -28,9 +32,9 @@
 
     {% if eval.evaluator.id != current_user.id %}
     <div class="col-12">
-      <label class="form-label" for="name">Reviewer Name</label>
+      <label class="form-label" for="reviewer-name">Reviewer Name</label>
       <div class="input-group">
-        <input class="form-control" id="name"
+        <input class="form-control" id="reviewer-name"
           value="{{ eval.evaluator.display_name }}" readonly>
         <button class="btn btn-outline-secondary" data-bs-toggle="tooltip"
           type="button" onclick="copy(this)">
@@ -40,10 +44,10 @@
     </div>
 
     <div class="col-sm-6">
-      <label class="form-label" for="id">Reviewer ID</label>
+      <label class="form-label" for="reviewer-id">Reviewer ID</label>
       <div class="input-group">
-        <input class="form-control" id="id" value="{{ eval.evaluator.id }}"
-          readonly>
+        <input class="form-control" id="reviewer-id"
+          value="{{ eval.evaluator.id }}" readonly>
         <button class="btn btn-outline-secondary" data-bs-toggle="tooltip"
           type="button" onclick="copy(this)">
           <i class="bi bi-clipboard"></i>
@@ -52,11 +56,11 @@
     </div>
 
     <div class="col-sm-6">
-      <label class="form-label" for="username">Reviewer Username</label>
+      <label class="form-label" for="reviewer-username">Reviewer
+        Username</label>
       <div class="input-group">
-        <input class="form-control" id="username"
-          value="{{ eval.evaluator.username }}"
-          readonly>
+        <input class="form-control" id="reviewer-username"
+          value="{{ eval.evaluator.username }}" readonly>
         <button class="btn btn-outline-secondary" data-bs-toggle="tooltip"
           type="button" onclick="copy(this)">
           <i class="bi bi-clipboard"></i>
@@ -67,9 +71,9 @@
 
     {% if eval.evaluatee.id != current_user.id %}
     <div class="col-12">
-      <label class="form-label" for="name">Reviewee Name</label>
+      <label class="form-label" for="reviewee-name">Reviewee Name</label>
       <div class="input-group">
-        <input class="form-control" id="name"
+        <input class="form-control" id="reviewee-name"
           value="{{ eval.evaluatee.display_name }}" readonly>
         <button class="btn btn-outline-secondary" data-bs-toggle="tooltip"
           type="button" onclick="copy(this)">
@@ -79,10 +83,10 @@
     </div>
 
     <div class="col-sm-6">
-      <label class="form-label" for="id">Reviewee ID</label>
+      <label class="form-label" for="reviewee-id">Reviewee ID</label>
       <div class="input-group">
-        <input class="form-control" id="id" value="{{ eval.evaluatee.id }}"
-          readonly>
+        <input class="form-control" id="reviewee-id"
+          value="{{ eval.evaluatee.id }}" readonly>
         <button class="btn btn-outline-secondary" data-bs-toggle="tooltip"
           type="button" onclick="copy(this)">
           <i class="bi bi-clipboard"></i>
@@ -91,11 +95,11 @@
     </div>
 
     <div class="col-sm-6">
-      <label class="form-label" for="username">Reviewee Username</label>
+      <label class="form-label" for="reviewee-username">Reviewee
+        Username</label>
       <div class="input-group">
-        <input class="form-control" id="username"
-          value="{{ eval.evaluatee.username }}"
-          readonly>
+        <input class="form-control" id="reviewee-username"
+          value="{{ eval.evaluatee.username }}" readonly>
         <button class="btn btn-outline-secondary" data-bs-toggle="tooltip"
           type="button" onclick="copy(this)">
           <i class="bi bi-clipboard"></i>
@@ -110,7 +114,7 @@
   <h4 class="mb-2">Review</h4>
 
   {% if (eval.review is not none and eval.feedback is not none) or
-  current_user.id == eval.evaluator.id %}
+  current_user.id == eval.evaluator.id or current_user.is_admin %}
   {% for key, value in eval.cohort.review_schema.get('d' ~ eval.day).items() %}
   <div class="mb-3">
     <p class="mb-1">{{ key|upper }}. {{ value.get('title') }}</p>
@@ -213,23 +217,6 @@
 {% endblock %}
 
 {% block script %}
-<script>
-  (function () {
-    'use strict'
-    var forms = document.querySelectorAll('.needs-validation')
-
-    Array.prototype.slice.call(forms)
-      .forEach(function (form) {
-        form.addEventListener('submit', function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }
-
-          form.classList.add('was-validated')
-        }, false)
-      })
-  })()
-</script>
+<script src="/static/validate.js"></script>
 <script src="/static/copy.js"></script>
 {% endblock %}

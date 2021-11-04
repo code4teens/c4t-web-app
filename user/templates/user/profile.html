@@ -3,14 +3,14 @@
 {% set active_page = 'profile' %}
 
 {% block description %}
-<meta name="description" content="Check out {{ user.display_name }}'s profile">
+<meta name="description" content="{{ user.display_name }}'s profile">
 {% endblock %}
 
 {% block title %}{{ user.display_name }}{% endblock %}
 
 {% block content %}
 <form class="container py-4" style="max-width: 960px;">
-  <h3 class="pb-3 mb-3 border-bottom">Profile</h3>
+  <h3 class="border-bottom mb-3 pb-3">Profile</h3>
 
   <div class="row g-2 mb-3">
     <div class="col-12">
@@ -39,8 +39,8 @@
     <div class="col-sm-6">
       <label class="form-label" for="username">Username</label>
       <div class="input-group">
-        <input class="form-control" id="username"
-          value="{{ user.name }}#{{ user.discriminator }}" readonly>
+        <input class="form-control" id="username" value="{{ user.username }}"
+          readonly>
         <button class="btn btn-outline-secondary" data-bs-toggle="tooltip"
           type="button" onclick="copy(this)">
           <i class="bi bi-clipboard"></i>
@@ -50,7 +50,7 @@
 
     {% for enrolment in user.enrolments %}
     <div class="col-12">
-      <label class="form-label" for="cohort-{{ loop.index }}">Cohort {{
+      <label class="form-label" for="cohort-{{ loop.index }}">Cohort #{{
         loop.index }}</label>
       <input class="form-control" id="cohort-{{ loop.index }}"
         value="{{ enrolment.cohort.name }}" readonly>
@@ -60,7 +60,7 @@
 
   {% if user.id == current_user.id %}
   <a href="/change_password">
-    <button class="w-100 btn btn-danger" type="button">Change password</button>
+    <button class="btn btn-danger w-100" type="button">Change password</button>
   </a>
   {% endif %}
 </form>
