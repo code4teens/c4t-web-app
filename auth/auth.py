@@ -30,9 +30,9 @@ def login_post():
     user = User.query.filter_by(id=id).one_or_none()
 
     if len(id) == 0 or len(password) == 0:
-        flash('Do not leave any fields blank')
+        flash('Do not leave fields blank')
     elif user is None:
-        flash('ID does not exist')
+        flash(f'User {id} does not exist')
     elif user.password is None:
         flash('Please click first-time login')
     elif bcrypt.checkpw(
@@ -67,13 +67,12 @@ def first_login_post():
     user = User.query.filter_by(id=id).one_or_none()
 
     if len(id) == 0 or len(password) == 0 or len(confirm_password) == 0:
-        flash('Do not leave any fields blank')
+        flash('Do not leave fields blank')
     elif user is None:
-        flash('ID does not exist')
+        flash(f'User {id} does not exist')
     elif user.password is not None:
         flash('You already set a password')
-    elif password is None or confirm_password is None \
-            or password != confirm_password:
+    elif password != confirm_password:
         flash('Passwords do not match')
     else:
         user.password = bcrypt.hashpw(
@@ -109,7 +108,7 @@ def change_password_post():
     user = User.query.filter_by(id=current_user.id).one_or_none()
 
     if len(password) == 0 or len(confirm_password) == 0:
-        flash('Do not leave any fields blank', 'danger')
+        flash('Do not leave fields blank', 'danger')
     elif password != confirm_password:
         flash('Passwords do not match', 'danger')
     else:

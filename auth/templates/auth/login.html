@@ -11,9 +11,9 @@
 {% endblock %}
 
 {% block content %}
-<form class="form-login container py-4" method="post" action="/login"
+<form class="container form-login py-4" method="post" action="/login"
   style="max-width: 960px;">
-  <h3 class="pb-3 mb-3 border-bottom">Login</h3>
+  <h3 class="border-bottom mb-3 pb-3">Login</h3>
 
   {% with messages = get_flashed_messages() %}
   {% if messages %}
@@ -25,14 +25,14 @@
 
   <div class="mb-3">
     <div class="form-floating">
-      <input class="form-control form-input-top" type="text" id="id" name="id"
+      <input class="form-control input-top" id="id" name="id" type="text"
         placeholder="id">
       <label for="id">ID</label>
     </div>
 
     <div class="form-floating">
-      <input class="form-control form-input-bottom" type="password"
-        id="password" name="password" placeholder="password">
+      <input class="form-control input-bottom" id="password" type="password"
+        name="password" placeholder="password">
       <label for="password">Password</label>
     </div>
   </div>
