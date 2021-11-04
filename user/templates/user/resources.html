@@ -32,7 +32,7 @@
     <p>Check again later.</p>
     {% else %}
     {% for i in range(cohort.duration) %}
-    {% if current_user.isadmin or cohort.start_date|is_past(i) %}
+    {% if current_user.is_admin or cohort.start_date|is_past(i) %}
     <a class="text-decoration-none" href="#">
       <div class="col">
         <div class="card py-4">
