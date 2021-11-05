@@ -25,13 +25,22 @@
   </select>
   {% endif %}
 
+  <h4 class="mb-3">References</h4>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-2">
+    {% block references %}
+    {% endblock %}
+  </div>
+
+  <hr class="my-4">
+
   <h4 class="mb-3">Project PDFs</h4>
 
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-2">
     {% if not current_user.is_admin and not cohort.start_date|is_past(0) %}
     <p>Check again later.</p>
     {% else %}
-    {% block resource %}
+    {% block projects %}
     <p>Something went wrong...</p>
     {% endblock %}
     {% endif %}

@@ -6,7 +6,7 @@ from flask_login import current_user, login_required
 
 from database import db_session
 from models import Cohort, Eval, User
-from utils import pdfs, tz
+from utils import projects, references, tz
 
 user = Blueprint('user', __name__, template_folder='templates/user')
 
@@ -127,7 +127,10 @@ def resources(cohort_id):
 
         if cohort.id in dpy:
             return render_template(
-                'resources_dpy.html', cohort=cohort, pdfs=pdfs
+                'resources_dpy.html',
+                cohort=cohort,
+                references=references,
+                projects=projects
             )
         else:
             return render_template('resources.html', cohort=cohort)
