@@ -10,7 +10,7 @@
 
 {% block content %}
 <div class="container py-4" style="max-width: 960px;">
-  <h3 class="border-bottom mb-3 pb-3">{{ cohort.name }}</h3>
+  <h3 class="border-bottom mb-3 pb-3">Dashboard</h3>
 
   {% if user.enrolments|length > 1 %}
   <select class="form-select form-select-sm mb-4"
@@ -30,7 +30,7 @@
   {% if user.incomplete_evals(cohort.id)|length == 0 %}
   <p>You have no pending tasks.</p>
   {% else %}
-  <div class="list-group mb-4">
+  <div class="list-group">
     {% for eval in user.incomplete_evals(cohort.id) %}
     <div class="list-group-item">
       <div class="d-flex justify-content-between w-100">
