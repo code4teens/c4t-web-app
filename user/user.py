@@ -123,7 +123,7 @@ def resources(cohort_id):
     ]:
         abort(403)
     else:
-        dpy = [1, 2, 3, 7]
+        dpy = [1, 2, 3, 4]
 
         if cohort.id in dpy:
             return render_template(
