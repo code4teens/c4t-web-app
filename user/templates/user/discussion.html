@@ -117,7 +117,7 @@
   current_user.id == eval.evaluator.id or current_user.is_admin %}
   {% for key, value in eval.cohort.review_schema.get('d' ~ eval.day).items() %}
   <div class="mb-3">
-    <p class="mb-1">{{ key|upper }}. {{ value.get('title') }}</p>
+    <p class="mb-1">{{ key|upper }}. {{ value.get('title')|safe }}</p>
     {% if value.q_type == "scaled" %}
     {% if eval.review is none %}
     <input class="form-range" name="{{ key }}" type="range"
