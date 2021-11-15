@@ -118,6 +118,21 @@
   {% for key, value in eval.cohort.review_schema.get('d' ~ eval.day).items() %}
   <div class="mb-3">
     <p class="mb-1">{{ key|upper }}. {{ value.get('title') }}</p>
+    {% if value.q_type == "scaled" %}
+    {% if eval.review is none %}
+    <input class="form-range" name="{{ key }}" type="range"
+      value="{{ value.options[0] }}" min="{{ value.options[0] }}"
+      max="{{ value.options[-1] }}"
+      onInput="$('#{{ key }}-label').html($(this).val())" required>
+    <small class="text-muted">Points: <small class="text-primary"
+        id="{{ key }}-label">{{ value.options[0] }}</small></small>
+    {% else %}
+    <input class="form-range" type="range" value="{{ eval.review.get(key) }}"
+      min="{{ value.options[0] }}" max="{{ value.options[-1] }}" disabled>
+    <small class="text-muted">Points: <small class="text-primary">{{
+        eval.review.get(key) }}</small></small>
+    {% endif %}
+    {% else %}
     {% for option in value.options %}
     <div class="form-check">
       {% if eval.review is none %}
@@ -133,6 +148,7 @@
         option|capitalize }}</label>
     </div>
     {% endfor %}
+    {% endif %}
   </div>
   {% endfor %}
 
