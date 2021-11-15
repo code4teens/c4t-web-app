@@ -1,32 +1,32 @@
 {
     "d1": {
         "q1": {
-            "title": "Does the code output Hello World! ?",
+            "title": "Does the code output <code class='text-success'>Hello World!</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q2": {
-            "title": "Did your peer set text = 'Marvin'? (single or double quotes are fine)",
+            "title": "Did your peer set <code>text = 'Marvin'</code>? <span class='text-muted'>(Single or double quotes are fine)</span>",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q3": {
-            "title": "For each string that your peer displayed without using strings, give 1 point",
+            "title": "For each string that your peer displayed without using strings, give 1 point.",
             "q_type": "scaled",
             "options": [1, 2, 3]
         },
         "q4": {
-            "title": "Does your peer's answer display 10.0 ?",
+            "title": "Does your peer's answer display <code class='text-success'>10.0</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q5": {
-            "title": "Does the output match 'the car exceeded the speed limt'?",
+            "title": "Does the output match <code class='text-success'>the car exceeded the speed limit</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q6": {
-            "title": "1 point if output matches, 1 point if your peer can output Pecos without using names[4]",
+            "title": "1 point if output matches, 1 point if your peer can output <code class='text-success'>Pecos</code> without using <code>names[4]</code>.",
             "q_type": "scaled",
             "options": [1, 2]
         },
@@ -38,27 +38,27 @@
     },
     "d2": {
         "q1": {
-            "title": "Set speed = 60 and run the code, output should not say 'over the speed limit'. Set speed to 61, output should say 'over the speed limit'. If both conditions are met, select yes.",
+            "title": "Set <code>speed = 60</code> and run the code, output should not say <code class='text-success'>over the speed limit</code>. Set <code>speed = 61</code>, output should say <code class='text-success'>over the speed limit</code>. If both conditions are met, select yes.",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q2": {
-            "title": "Run my_function() if output displays 'Hi Marvin!', select yes.",
+            "title": "Run <code>my_function()</code>. If output matches <code class='text-success'>Hi Marvin!</code>, select yes.",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q3": {
-            "title": "Run my_function('Toto')\nmy_function('Fifi') if output displays 'Hi Toto!\nHi Fifi!', select yes.",
+            "title": "Run below code block: <br><code>my_function('Toto')<br>my_function('Fifi')</code><br><br>If output matches below, select yes. <br><code class='text-success'>Hi Toto!<br>Hi Fifi!</code>",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q4": {
-            "title": "Test the following code: print(calculate(15,'/',5)). The output should show 3. Run your own set of tests with addition, multiplication and division. If everything works as expected, select yes.",
+            "title": "Run <code>print(calculate(15,'/',5))</code>, output should display <code class='text-success'>3</code>. Run again with your own set of tests including addition, subtraction and multiplication. If everything works as expected, select yes.",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q5": {
-            "title": "Test the following code: print(check_string('Hello World!'), check_string('The yes string'), check_string('Three four five')). The output should be: No!\nYes!\nNo!",
+            "title": "Run <code>print(check_string('Hello World!'), check_string('The yes string'), check_string('Three four five'))</code>.<br><br>If output matches below, select yes.<br><code class='text-success'>No!<br>Yes!<br>No!</code>",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
@@ -68,7 +68,7 @@
             "options": ["no", "yes"]
         },
         "q7": {
-            "title": "Check if the output matches the example output. Add 'Egypt' and 'Zambia' to the list, the output should now also include 'Come and visit Egypt' and 'Come and visit Zambia'. If all checks are passed, select yes.",
+            "title": "Check if the output matches the example output. Add <code>Egypt</code> and <code>Zambia</code> to the list, the output should now also include <code class='text-success'>Come and visit Egypt</code> and <code class='text-success'>Come and visit Zambia</code>. If all checks are passed, select yes.",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
@@ -134,106 +134,106 @@
     },
     "d5": {
         "q1": {
-            "title": "Does your peer's discord bot able to send an emoji using the command $emoji?",
+            "title": "Is your peer's bot able to send an emoji using the command <code>$emoji</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q2": {
-            "title": "Does your peer's discord bot able to send an emoji in embed message form using the command $emoji?",
+            "title": "Is your peer's bot able to send an emoji in an embed message form using the command <code>$emoji</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q3": {
-            "title": "Does your peer's discord bot able to send a gif using the command $gif?",
+            "title": "Is your peer's bot able to send a gif using the command <code>$gif</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q4": {
-            "title": "Does your peer's discord bot able to send an image and a short description using the command $intro?",
+            "title": "Is your peer's bot able to send an image and a short description using the command <code>$intro</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q5": {
-            "title": "Does your peer's discord bot able to  an image using the command $img?",
+            "title": "Is your peer's bot able to send an image using the command <code>$img</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q6": {
-            "title": "Does your peer's discord bot able to react a tick and emoji to message using the command $react?\n(1 point if react only a tick, 2 points if react a tick and random emoji)",
+            "title": "Is your peer's bot able to react to the message with a tick and a random emoji using the command <code>$react?</code> <span class='text-muted'>(1 point if the bot reacts with either only a tick or a random emoji, 2 points if the bot reacts with both a tick and a random emoji)</span>",
             "q_type": "scaled",
             "options": [1, 2]
         }
     },
     "d6": {
         "q1": {
-            "title": "Section 1: Print the keys and the values as shown in the output example.\nSection 2: List all the available keys in the database.\nSection 3: Delete a key and print the updated list.\n(1 point for each section. EX: If only 2 sections are completed then scale 2 for your peers)",
+            "title": "Section 1: Print the keys and values as shown in the output example.<br>Section 2: List all the available keys in the database.<br>Section 3: Delete a key and print the updated list.<br><small class='text-muted'>(1 point for each section)</small>",
             "q_type": "scaled",
             "options": [1, 2, 3]
         },
         "q2": {
-            "title": "Section 1: Add one element in fruit\nSection 2: Add two elements in dessert\nSection 3: Delete one of the elements in dessert\nSection 4: List and show all the keys and values available\n(1 points for each section. )",
+            "title": "Section 1: Add one element to <code>fruit</code>.<br>Section 2: Add two elements to <code>dessert</code>.<br>Section 3: Delete any one element from <code>dessert</code>.<br>Section 4: List all keys and values in the database.<br><small class='text-muted'>(1 point for each section)</small>",
             "q_type": "scaled",
             "options": [1, 2, 3, 4]
         },
         "q3": {
-            "title": "Section 1: Create a new key in database using if-else statement\nSection 2: Add 'Good Luck' as a value in the key\nSection 3: List and show the value available\n(1 points for each section)",
+            "title": "Section 1: Add a new key to the database using <code>if-else</code> statement.<br>Section 2: Add <code>Good Luck</code> as the value for the key.<br>Section 3: Output the key-value pair.<br><small class='text-muted'>(1 point for each section)</small>",
             "q_type": "scaled",
             "options": [1, 2, 3]
         },
         "q4": {
-            "title": "Does your peer's discord bot able to add a new message to the database using the command $new [your message here]?\n(If the message is successfully added, the bot will return: New encouraging message added as shown in the output example) ",
+            "title": "Is your peer's bot able to add a new message to the database using the command <code>$new [your message here]</code>?<br><small class='text-muted'>(If the message was successfully added, the bot should return <code class='text-success'>New encouraging message added.</code> as per given example)</small>",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q5": {
-            "title": "Does your peer's discord bot able to list all messages stored in database using command $list?\n(Choose no if the list is with 'ObesrvedList' problem)",
+            "title": "Is your peer's bot able to list all messages stored in the database using the command <code>$list</code>?<br><small class='text-muted'>(Select no if the output contains <code class='text-success'>ObservedList</code>)</small>",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q6": {
-            "title": "Does your peer's discord bot able to delete a new message to the database using the command $delete [index of the message]?\n(If the message is successfully deleted, the bot will return: 'Encouraging message deleted' as shown in the output example) ",
+            "title": "Is your peer's bot able to delete a specific message based on its index from the database using the command <code>$delete [index of message]</code>?<br><small class='text-muted'>(If the message was successfully deleted, the bot should return <code class='text-success'>Encouraging message deleted.</code> as per given example)</small>",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q7": {
-            "title": "Does your peer's discord bot able to delete specific message from database and show the updated list of messages using the command $del_list?\n(1 point for delete function or list function, 2 points for both but with 'ObesrvedList' problem, 3 points for exact output example)",
+            "title": "Is your peer's bot able to delete a specific message based on its index from the database, and output the updated list of messages using the command <code>$del_list? [index of message]</code><br><small class='text-muted'>(1 point for delete or list function, 2 points for both but with <code class='text-success'>ObservedList</code> problem, 3 points if output matches given example)</small>",
             "q_type": "scaled",
             "options": [1, 2, 3]
         }
     },
     "d7": {
         "q1": {
-            "title": "Does your peer's discord bot able to scrape the first paragraph from the website using the command $scrape?",
+            "title": "Is your peer's bot able to scrape the first paragraph from the website using the command <code>$scrape</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q2": {
-            "title": "Does your peer's discord bot able to scrape the correct row in the table from selected website using the command $programming?",
+            "title": "Is your peer's bot able to scrape the correct table row from the website using the command <code>$programming</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q3": {
-            "title": "How many elements does your peer's discord bot able to scrape from the table using the command $programming?\n(1 point for each element)",
+            "title": "How many elements is your peer's bot able to scrape from the table using the command <code>$programming</code>?<br><small class='text-muted'>(1 point for each element)</small>",
             "q_type": "scaled",
             "options": [1, 2, 3, 4, 5, 6]
         },
         "q4": {
-            "title": "Does your peer's discord bot able to scrape the Currecy name (Ex: USD) and Exchange rate from the website using the command $currency?",
+            "title": "Is your peer's bot able to scrape a Currency (e.g. USD) and its Exchange Rate from the website using the command <code>$currency</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q5": {
-            "title": "Does your peer's discord bot able to scrape the Job Title, Company Name and Salary from selected website?\n(1 point for each element)",
+            "title": "Is your peer's bot able to scrape the Job Title, Company Name and Salary from the website?<br><small class='text-muted'>(1 point for each element)</small>",
             "q_type": "scaled",
             "options": [1, 2, 3]
         },
         "q6": {
-            "title": "Section 1: Does your peer's discord bot able to scrape and compile the 1st and 2nd job's info from selected website using command $job?\n(1 point for each job's info)\nSection 2: Does your peer's discord bot able to send the scraped job list an embed message form using the command $job?\n(1 point for embed message)",
+            "title": "Section 1: Is your peer's bot able to scrape and compile the 1st and 2nd job's info from the website using command <code>$job</code>?<span class='text-muted'>(1 point for each job info)</span><br>Section 2: Is your peer's bot able to send the scraped job list in an embed message form using the command <code>$job</code>?<span class='text-muted'>(1 point for embed message)</span>",
             "q_type": "scaled",
             "options": [1, 2, 3]
         },
         "q7": {
-            "title": "Section 1: Your peer's discord bot able to scrape the movie name (1 point) and storyline (1 point) from selected website.\nSection 2: Your peer's discord bot able to send out an error message when no movie name was entered when using the command $movie [enter movie name] (1 point)\n(Scale 3 if the 3 requirements are fullfilled, scale 2 if only 2 requirements are completed.) ",
+            "title": "Section 1: Is your peer's bot able to scrape the movie name (1 point) and storyline (1 point) from the website.<br>Section 2: Is your peer's bot able to display an error message when no movie title was passed as an argument to the command <code>$movie [your movie title]</code> (1 point)",
             "q_type": "scaled",
             "options": [1, 2, 3]
         }
