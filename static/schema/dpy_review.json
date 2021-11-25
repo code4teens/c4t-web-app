@@ -48,7 +48,7 @@
             "options": ["no", "yes"]
         },
         "q3": {
-            "title": "Run the below code block: <br><code>my_function('Toto')<br>my_function('Fifi')</code><br><br>If the output matches below, select yes. <br><code class='text-success'>Hi Toto!<br>Hi Fifi!</code>",
+            "title": "Run the below code block: <br><code>say_hi('Toto')<br>say_hi('Fifi')</code><br><br>If the output matches below, select yes. <br><code class='text-success'>Hi Toto!<br>Hi Fifi!</code>",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
