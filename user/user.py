@@ -6,7 +6,7 @@ from flask_login import current_user, login_required
 
 from database import db_session
 from models import Cohort, Eval, User
-from utils import projects, references, tz
+from utils import c4w_projects, projects, references, tz
 
 user = Blueprint('user', __name__, template_folder='templates/user')
 
@@ -124,6 +124,7 @@ def resources(cohort_id):
         abort(403)
     else:
         dpy = [1, 2, 3, 4]
+        c4w_dpy = [5]
 
         if cohort.id in dpy:
             return render_template(
@@ -131,6 +132,13 @@ def resources(cohort_id):
                 cohort=cohort,
                 references=references,
                 projects=projects
+            )
+        elif cohort.id in c4w_dpy:
+            return render_template(
+                'resources_c4w_dpy.html',
+                cohort=cohort,
+                references=references,
+                projects=c4w_projects
             )
         else:
             return render_template('resources.html', cohort=cohort)
