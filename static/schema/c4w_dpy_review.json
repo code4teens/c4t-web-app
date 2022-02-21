@@ -124,12 +124,12 @@
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q4": {
+        "q3": {
             "title": "Check the code for the command, make sure the value is not hard coded. Run the command $weather, is the output accurate to the actual weather outside?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q5": {
+        "q4": {
             "title": "Rate how useful/fun/creative the information scraped is.",
             "q_type": "scaled",
             "options": [1, 2, 3, 4, 5]
@@ -152,56 +152,36 @@
             "options": ["no", "yes"]
         },
         "q4": {
-            "title": "Is the bot able to send an image and a short description using the command <code>$intro</code>?",
+            "title": "Run the command `$malaysia_news`, is the bot able give a news article related to Malaysia?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q5": {
-            "title": "Is the bot able to send an image using the command <code>$img</code>?",
+            "title": "Rigorously test the comand `$news` by searching for news with any keyword, example `$news tech`. Is the bot able to output news related to your search keyword?",
             "q_type": "mcq",
             "options": ["no", "yes"]
-        },
-        "q6": {
-            "title": "Is the bot able to react to the message with a tick and a random emoji using the command <code>$react</code>?<br><small class='text-muted'>(Give 1 point if the bot reacts with either only a tick or a random emoji)<br>(Give 2 points if the bot reacts with both a tick and a random emoji)</small>",
-            "q_type": "scaled",
-            "options": [1, 2]
         }
     },
     "d5": {
         "q1": {
-            "title": "Section 1: Print the key-value pairs as shown in the example output.<br>Section 2: List all the available keys in the database.<br>Section 3: Delete a key and print the updated list.<br><small class='text-muted'>(Give 1 point for each section)</small>",
-            "q_type": "scaled",
-            "options": [1, 2, 3]
+            "title": "Run the command `$write One Two Three Four`, the bot should write these lines to a csv file. Open the csv in the replit project and make sure `One Two Three Four` is written in the csv.",
+            "q_type": "mcq",
+            "options": ["no", "yes"]
         },
         "q2": {
-            "title": "Section 1: Add one element to <code>fruit</code>.<br>Section 2: Add two elements to <code>dessert</code>.<br>Section 3: Delete any one element from <code>dessert</code>.<br>Section 4: List all keys and values in the database.<br><small class='text-muted'>(Give 1 point for each section)</small>",
-            "q_type": "scaled",
-            "options": [1, 2, 3, 4]
+            "title": "Run the command `$read`, does the bot's output include `One Two Three Four`?",
+            "q_type": "mcq",
+            "options": ["no", "yes"]
         },
         "q3": {
-            "title": "Section 1: Add a new key to the database using an <code>if-else</code> statement.<br>Section 2: Add <code>Good Luck</code> as the value for the key.<br>Section 3: Output the key-value pair.<br><small class='text-muted'>(Give 1 point for each section)</small>",
-            "q_type": "scaled",
-            "options": [1, 2, 3]
+            "title": "Ask your peer how they managed to solve this question. Run the command `$analyse`, is the most voted place `cargo eats`? Try changing the csv by making another restaurant have most amount of votes. Run the command again, did the output change?",
+            "q_type": "mcq",
+            "options": ["no", "yes"]
         },
         "q4": {
-            "title": "Is the bot able to add a new message to the database using the command <code>$new [your message here]</code>?<br><small class='text-muted'>(If the message was successfully added, the bot should say <code class='text-success'>New encouraging message added.</code> as per given example)</small>",
+            "title": "Run the command `$vote_list`, you should be able to see 5 different eateries that you can vote for. Ask your peer to show their replit, open the csv file with the 5 eateries. Run the command `$vote <insert restaurant name here>`, did your vote change the value of the csv file?",
             "q_type": "mcq",
             "options": ["no", "yes"]
-        },
-        "q5": {
-            "title": "Is the bot able to list all messages stored in the database using the command <code>$list</code>?<br><small class='text-muted'>(Select no if the bot's message contains <code class='text-success'>ObservedList</code>)</small>",
-            "q_type": "mcq",
-            "options": ["no", "yes"]
-        },
-        "q6": {
-            "title": "Is the bot able to delete a specific message based on its index from the database using the command <code>$delete [index of message]</code>?<br><small class='text-muted'>(If the message was successfully deleted, the bot should say <code class='text-success'>Encouraging message deleted.</code> as per given example)</small>",
-            "q_type": "mcq",
-            "options": ["no", "yes"]
-        },
-        "q7": {
-            "title": "Is the bot able to delete a specific message based on its index from the database, and display the updated list of messages using the command <code>$del_list? [index of message]</code><br><small class='text-muted'>(Give 1 point for delete or list function)<br>(Give 2 points for both but with <code class='text-success'>ObservedList</code> problem)<br>(Give 3 points if the output matches given example)</small>",
-            "q_type": "scaled",
-            "options": [1, 2, 3]
         }
     }
 }
