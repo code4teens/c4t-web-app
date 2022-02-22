@@ -98,17 +98,17 @@
             "options": ["no", "yes"]
         },
         "q5": {
-            "title": "Does the bot reply to the command $hello",
+            "title": "Does the bot reply to the command <code>$hello</code>",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q6": {
-            "title": "Does the bot reply greet the user by their name using the command $greet",
+            "title": "Does the bot reply greet the user by their name using the command <code>$greet</code>",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q7": {
-            "title": "Does the bot reply greet the user by their name using the command $greet",
+            "title": "Is the bot able to repeat the user's message without include the <code>$echo</code>",
             "q_type": "mcq",
             "options": ["no", "yes"]
         }
