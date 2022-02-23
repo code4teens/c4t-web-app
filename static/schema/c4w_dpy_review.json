@@ -115,17 +115,17 @@
     },
     "d3": {
         "q1": {
-            "title": "Does the bot reply to the command $s&p with the real time value of the stock? Make sure to check online for the actual price.",
+            "title": "Does the bot reply to the command <code>$s&p</code> with the real time value of the stock? Make sure to check online for the actual price.",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q2": {
-            "title": "Run the following comands `$stock GOOGL` , `$stock META`. Is the bot able to dynamically scrape the value of any stock?",
+            "title": "Run the following comands <code>$stock GOOGL</code> , <code>$stock META</code>. Is the bot able to dynamically scrape the value of any stock?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q3": {
-            "title": "Check the code for the command, make sure the value is not hard coded. Run the command $weather, is the output accurate to the actual weather outside?",
+            "title": "Check the code for the command, make sure the value is not hard coded. Run the command <code>$weather</code>, is the output accurate to the actual weather outside?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
@@ -137,49 +137,49 @@
     },
     "d4": {
         "q1": {
-            "title": "Does the command $quote give a random motivational quote?",
+            "title": "Does the command <code>$quote</code> give a random motivational quote?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q2": {
-            "title": "Does the command $bitcoin give the realtime price of bitcoin?",
+            "title": "Does the command <code>$bitcoin</code> give the realtime price of bitcoin?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q3": {
-            "title": "Run the commands `$crypto solana`, `$crypto polkadot`. Is the bot able to output the prices of these cryptocurrencies?",
+            "title": "Run the commands <code>$crypto solana</code>, <code>$crypto polkadot</code>. Is the bot able to output the prices of these cryptocurrencies?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q4": {
-            "title": "Run the command `$malaysia_news`, is the bot able give a news article related to Malaysia?",
+            "title": "Run the command <code>$malaysia_news</code>, is the bot able give a news article related to Malaysia?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q5": {
-            "title": "Rigorously test the comand `$news` by searching for news with any keyword, example `$news tech`. Is the bot able to output news related to your search keyword?",
+            "title": "Rigorously test the comand <code>$news</code> by searching for news with any keyword, example <code>$news tech</code>. Is the bot able to output news related to your search keyword?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         }
     },
     "d5": {
         "q1": {
-            "title": "Run the command `$write One Two Three Four`, the bot should write these lines to a csv file. Open the csv in the replit project and make sure `One Two Three Four` is written in the csv.",
+            "title": "Run the command <code>$write One Two Three Four</code>, the bot should write these lines to a csv file. Open the csv in the replit project and make sure <code class='text-success'>One Two Three Four</code> is written in the csv.",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q2": {
-            "title": "Run the command `$read`, does the bot's output include `One Two Three Four`?",
+            "title": "Run the command <code>$read</code>, does the bot's output include <code class='text-success'e>One Two Three Four</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q3": {
-            "title": "Ask your peer how they managed to solve this question. Run the command `$analyse`, is the most voted place `cargo eats`? Try changing the csv by making another restaurant have most amount of votes. Run the command again, did the output change?",
+            "title": "Ask your peer how they managed to solve this question. Run the command <code class='text-success'>$analyse</code>, is the most voted place <code>cargo eats</code>? Try changing the csv by making another restaurant have most amount of votes. Run the command again, did the output change?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
         "q4": {
-            "title": "Run the command `$vote_list`, you should be able to see 5 different eateries that you can vote for. Ask your peer to show their replit, open the csv file with the 5 eateries. Run the command `$vote <insert restaurant name here>`, did your vote change the value of the csv file?",
+            "title": "Run the command <code>$vote_list</code>, you should be able to see 5 different eateries that you can vote for. Ask your peer to show their replit, open the csv file with the 5 eateries. Run the command <code>$vote your_favourite_place_to_eat</code>, did your vote change the value of the csv file?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         }
