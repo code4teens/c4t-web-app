@@ -3,7 +3,7 @@
 {% set active_page = 'admin' %}
 
 {% block description %}
-<meta name="description" content="Admin">
+<meta name="description" content="Admin page.">
 {% endblock %}
 
 {% block style %}
@@ -43,10 +43,8 @@
       <tr>
         <td>{{ enrolment.user.id }}</td>
         <td class="visually-hidden">id={{ enrolment.user.id }}</td>
-        <td>{{ enrolment.user.name }}#{{ enrolment.user.discriminator }}
-        </td>
-        <td class="visually-hidden">username={{ enrolment.user.name }}#{{
-          enrolment.user.discriminator }}</td>
+        <td>{{ enrolment.user.username }}</td>
+        <td class="visually-hidden">username={{ enrolment.user.username }}</td>
         <td class="visually-hidden">discriminator={{
           enrolment.user.discriminator }}</td>
         <td><a href="/profile/{{ enrolment.user.id }}">{{
@@ -57,26 +55,25 @@
         {% for _ in range(cohort.duration) %}
         <td>
           {% if enrolment.user.daily_incomplete_evals(cohort.id,
-          cohort.start_date, loop.index0)|length == 0 %}
-          <span class="text-success">0/{{ enrolment.user.daily_evals(cohort.id,
-            cohort.start_date, loop.index0)|length }}</span>
+          loop.index)|length == 0 %}
+          <span class="text-success">{{ enrolment.user.daily_evals(cohort.id,
+            loop.index)|length }}/{{ enrolment.user.daily_evals(cohort.id,
+            loop.index)|length }}</span>
           {% else %}
           <span class="text-danger">{{
-            enrolment.user.daily_incomplete_evals(cohort.id, cohort.start_date,
-            loop.index0)|length }}/{{ enrolment.user.daily_evals(cohort.id,
-            cohort.start_date,
-            loop.index0)|length
+            enrolment.user.daily_complete_evals(cohort.id, loop.index)|length
+            }}/{{ enrolment.user.daily_evals(cohort.id, loop.index)|length
             }}</span>
           {% endif %}
         </td>
         <td class="visually-hidden">
           {% if enrolment.user.daily_incomplete_evals(cohort.id,
-          cohort.start_date, loop.index0)|length == 0 %}
-          <span class="text-success">day_{{ loop.index }}=0</span>
+          loop.index)|length == 0 %}
+          <span class="text-success">day_{{ loop.index }}={{
+            enrolment.user.daily_evals(cohort.id, loop.index)|length }}</span>
           {% else %}
-          <span class="text-danger">day_{{ loop.index}}={{
-            enrolment.user.daily_incomplete_evals(cohort.id, cohort.start_date,
-            loop.index0)|length
+          <span class="text-danger">day_{{ loop.index }}={{
+            enrolment.user.daily_complete_evals(cohort.id, loop.index)|length
             }}</span>
           {% endif %}
         </td>
