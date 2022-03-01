@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from flask_login import UserMixin
 from sqlalchemy import (
@@ -9,7 +9,6 @@ from sqlalchemy import (
     DateTime,
     ForeignKey,
     func,
-    Integer,
     JSON,
     SmallInteger,
     String
@@ -24,13 +23,11 @@ from utils import tz
 class User(UserMixin, Base):
     __tablename__ = 'user'
     id = Column(BigInteger, primary_key=True)
-    password = Column(String(60), nullable=False)
+    password = Column(String(60), nullable=True)
     name = Column(String(64), nullable=False)
     discriminator = Column(String(4), nullable=False)
     display_name = Column(String(64), nullable=False)
-    xp = Column(Integer, nullable=False, default=0)
     is_admin = Column(Boolean, nullable=False, default=False)
-    api_key = Column(String(43), nullable=True)
     created_at = Column(DateTime, nullable=False, default=func.now())
     last_updated = Column(DateTime, nullable=False, default=func.now())
 
@@ -67,10 +64,9 @@ class User(UserMixin, Base):
         return filtered_evals
 
     @hybridmethod
-    def daily_evals(self, cohort_id, start_date, day):
-        date = start_date + timedelta(days=day)
+    def daily_evals(self, cohort_id, day):
         filtered_evals = list(
-            filter(lambda x: x.date == date, self.evals(cohort_id))
+            filter(lambda x: x.day == day, self.evals(cohort_id))
         )
 
         return filtered_evals
@@ -85,13 +81,22 @@ class User(UserMixin, Base):
         return incomplete_evals
 
     @hybridmethod
-    def daily_incomplete_evals(self, cohort_id, start_date, day):
+    def daily_incomplete_evals(self, cohort_id, day):
         incomplete_evals = [
-            eval for eval in self.daily_evals(cohort_id, start_date, day)
+            eval for eval in self.daily_evals(cohort_id, day)
             if eval.review is None or eval.feedback is None
         ]
 
         return incomplete_evals
+
+    @hybridmethod
+    def daily_complete_evals(self, cohort_id, day):
+        complete_evals = [
+            eval for eval in self.daily_evals(cohort_id, day)
+            if eval not in self.daily_incomplete_evals(cohort_id, day)
+        ]
+
+        return complete_evals
 
     @hybridproperty
     def username(self):
