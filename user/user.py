@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from functools import wraps
 
-from flask import abort, Blueprint, redirect, render_template, request
+from flask import abort, Blueprint, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 
 from database import db_session
@@ -51,7 +51,7 @@ def is_past(date, day):
 @user.route('/admin')
 @admin_only
 def admin():
-    return redirect('/admin/cohorts')
+    return redirect(url_for('user.admin_cohorts'))
 
 
 @user.route('/admin/cohorts')
@@ -82,18 +82,42 @@ def profile(id):
     return render_template('profile.html', user=user)
 
 
+@user.route('/dashboard')
+@user.route('/dashboard/<int:user_id>')
 @user.route('/dashboard/<int:user_id>/<int:cohort_id>')
 @admin_or_owner_only
-def dashboard(user_id, cohort_id):
-    user = User.query.filter_by(id=user_id).one_or_none()
-    cohort = Cohort.query.filter_by(id=cohort_id).one_or_none()
+def dashboard(user_id=None, cohort_id=None):
+    if user_id is None:
+        cohort_id = current_user.enrolments[-1].cohort.id
 
-    if user is None or cohort is None or cohort.id not in [
-        enrolment.cohort.id for enrolment in user.enrolments
-    ]:
-        abort(404)
+        return redirect(
+            url_for(
+                'user.dashboard', user_id=current_user.id, cohort_id=cohort_id
+            )
+        )
     else:
-        return render_template('dashboard.html', user=user, cohort=cohort)
+        user = User.query.filter_by(id=user_id).one_or_none()
+
+        if user is None:
+            abort(404)
+
+        if cohort_id is None:
+            cohort_id = user.enrolments[-1].cohort.id
+
+            return redirect(
+                url_for('user.dashboard', user_id=user.id, cohort_id=cohort_id)
+            )
+        else:
+            cohort = Cohort.query.filter_by(id=cohort_id).one_or_none()
+
+            if cohort is None or cohort.id not in [
+                enrolment.cohort.id for enrolment in user.enrolments
+            ]:
+                abort(404)
+            else:
+                return render_template(
+                    'dashboard.html', user=user, cohort=cohort
+                )
 
 
 @user.route('/discussions/<int:id>')
@@ -126,34 +150,41 @@ def discussions_post(id):
     return render_template('discussion.html', eval=eval)
 
 
+@user.route('/resources')
 @user.route('/resources/<int:cohort_id>')
 @login_required
-def resources(cohort_id):
-    cohort = Cohort.query.filter_by(id=cohort_id).one_or_none()
+def resources(cohort_id=None):
+    if cohort_id is None:
+        cohort_id = current_user.enrolments[-1].cohort.id
 
-    if cohort is None:
-        abort(404)
-    elif cohort.id not in [
-        enrolment.cohort.id for enrolment in current_user.enrolments
-    ]:
-        abort(403)
+        return redirect(url_for('user.resources', cohort_id=cohort_id))
     else:
-        dpy = [1, 2, 3, 4]
-        c4w_dpy = [5]
+        cohort = Cohort.query.filter_by(id=cohort_id).one_or_none()
 
-        if cohort.id in dpy:
-            return render_template(
-                'resources_dpy.html',
-                cohort=cohort,
-                references=references,
-                projects=projects
-            )
-        elif cohort.id in c4w_dpy:
-            return render_template(
-                'resources_c4w_dpy.html',
-                cohort=cohort,
-                references=references,
-                projects=c4w_projects
-            )
+        if cohort is None:
+            abort(404)
+
+        if cohort.id not in [
+            enrolment.cohort.id for enrolment in current_user.enrolments
+        ]:
+            abort(403)
         else:
-            return render_template('resources.html', cohort=cohort)
+            c4t_dpy = [1, 2, 3, 4, 6]
+            c4w_dpy = [5]
+
+            if cohort.id in c4t_dpy:
+                return render_template(
+                    'resources_dpy.html',
+                    cohort=cohort,
+                    references=references,
+                    projects=projects
+                )
+            elif cohort.id in c4w_dpy:
+                return render_template(
+                    'resources_c4w_dpy.html',
+                    cohort=cohort,
+                    references=references,
+                    projects=c4w_projects
+                )
+            else:
+                return render_template('resources.html', cohort=cohort)

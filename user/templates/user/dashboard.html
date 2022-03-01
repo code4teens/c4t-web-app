@@ -10,7 +10,7 @@
 
 {% block content %}
 <div class="container py-4" style="max-width: 960px;">
-  <h3 class="border-bottom mb-3 pb-3">Dashboard</h3>
+  <h3 class="border-bottom mb-3 pb-3">{{ user.display_name }}'s Dashboard</h3>
 
   {% if user.enrolments|length > 1 %}
   <select class="form-select form-select-sm mb-4"
@@ -28,7 +28,7 @@
   <h4 class="mb-3">To-Do List</h4>
 
   {% if user.incomplete_evals(cohort.id)|length == 0 %}
-  <p>You have no pending tasks.</p>
+  <p>No pending tasks.</p>
   {% else %}
   <div class="list-group">
     {% for eval in user.incomplete_evals(cohort.id) %}

@@ -14,11 +14,7 @@ def login_get():
         if current_user.is_admin:
             return redirect(url_for('user.admin'))
         else:
-            return redirect(url_for(
-                'user.dashboard',
-                user_id=current_user.id,
-                cohort_id=current_user.enrolments[-1].cohort.id
-            ))
+            return redirect(url_for('user.dashboard', user_id=current_user.id))
 
     return render_template('login.html')
 
@@ -43,11 +39,7 @@ def login_post():
         if current_user.is_admin:
             return redirect(url_for('user.admin'))
         else:
-            return redirect(url_for(
-                'user.dashboard',
-                user_id=current_user.id,
-                cohort_id=current_user.enrolments[-1].cohort.id
-            ))
+            return redirect(url_for('user.dashboard', user_id=current_user.id))
     else:
         flash('Wrong password')
 
@@ -85,11 +77,7 @@ def first_login_post():
         if current_user.is_admin:
             return redirect(url_for('user.admin'))
         else:
-            return redirect(url_for(
-                'user.dashboard',
-                user_id=current_user.id,
-                cohort_id=current_user.enrolments[-1].cohort.id
-            ))
+            return redirect(url_for('user.dashboard', user_id=current_user.id))
 
     return render_template('first_login.html')
 
