@@ -20,7 +20,7 @@
   <h4 class="mb-3">Cohorts</h4>
 
   <table
-    class="table table-bordered table-striped table-hover text-center w-100"
+    class="table table-bordered table-striped table-hover text-center text-nowrap w-100"
     id="dataTable">
     <thead>
       <tr>
@@ -30,10 +30,11 @@
         <th class="visually-hidden" scope="col">Name</th>
         <th scope="col">Nickname</th>
         <th class="visually-hidden" scope="col">Nickname</th>
-        <th scope="col">Duration</th>
-        <th class="visually-hidden" scope="col">Duration</th>
         <th scope="col">Start Date</th>
         <th class="visually-hidden" scope="col">Start Date</th>
+        <th scope="col">Duration</th>
+        <th class="visually-hidden" scope="col">Duration</th>
+        <th scope="col">Enrolments</th>
         <th scope="col">Active?</th>
       </tr>
     </thead>
@@ -47,10 +48,12 @@
         <td class="visually-hidden">name={{ cohort.name }}</td>
         <td>{{ cohort.nickname }}</td>
         <td class="visually-hidden">nickname={{ cohort.nickname }}</td>
-        <td>{{ cohort.duration }}</td>
-        <td class="visually-hidden">duration={{ cohort.duration }}</td>
         <td>{{ cohort.start_date }}</td>
         <td class="visually-hidden">start_date={{ cohort.start_date }}</td>
+        <td>{{ cohort.duration }}</td>
+        <td class="visually-hidden">duration={{ cohort.duration }}</td>
+        <td>{{ cohort.enrolments|selectattr("user.is_admin",
+          "false")|list|length}}</td>
         <td>
           {% if cohort.is_active %}
           <span class="text-success">Yes</span>
