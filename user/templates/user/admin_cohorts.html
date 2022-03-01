@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% set active_page = 'admin' %}
+
+{% block description %}
+<meta name="description" content="Admin">
+{% endblock %}
+
+{% block style %}
+<link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css"
+  rel="stylesheet">
+{% endblock %}
+
+{% block title %}Admin{% endblock %}
+
+{% block content %}
+<div class="container py-4" style="max-width: 960px;">
+  <h3 class="border-bottom mb-3 pb-3">Admin</h3>
+
+  <h4 class="mb-3">Cohorts</h4>
+
+  <table
+    class="table table-bordered table-striped table-hover text-center w-100"
+    id="dataTable">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th class="visually-hidden" scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th class="visually-hidden" scope="col">Name</th>
+        <th scope="col">Nickname</th>
+        <th class="visually-hidden" scope="col">Nickname</th>
+        <th scope="col">Duration</th>
+        <th class="visually-hidden" scope="col">Duration</th>
+        <th scope="col">Start Date</th>
+        <th class="visually-hidden" scope="col">Start Date</th>
+        <th scope="col">Active?</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for cohort in cohorts %}
+      <tr>
+        <td>{{ cohort.id }}</td>
+        <td class="visually-hidden">id={{ cohort.id }}</td>
+        <td><a href="/admin/cohorts/{{ cohort.id }}">{{ cohort.name }}</a></td>
+        <!-- <td>{{ cohort.name }}</td> -->
+        <td class="visually-hidden">name={{ cohort.name }}</td>
+        <td>{{ cohort.nickname }}</td>
+        <td class="visually-hidden">nickname={{ cohort.nickname }}</td>
+        <td>{{ cohort.duration }}</td>
+        <td class="visually-hidden">duration={{ cohort.duration }}</td>
+        <td>{{ cohort.start_date }}</td>
+        <td class="visually-hidden">start_date={{ cohort.start_date }}</td>
+        <td>
+          {% if cohort.is_active %}
+          <span class="text-success">Yes</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+
+{% block script %}
+<script
+  src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script
+  src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#dataTable').DataTable({
+      "scrollX": true
+    });
+  });
+</script>
+{% endblock %}

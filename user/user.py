@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from functools import wraps
 
-from flask import abort, Blueprint, render_template, request
+from flask import abort, Blueprint, redirect, render_template, request
 from flask_login import current_user, login_required
 
 from database import db_session
@@ -51,9 +51,24 @@ def is_past(date, day):
 @user.route('/admin')
 @admin_only
 def admin():
-    evals = Eval.query.all()
+    return redirect('/admin/cohorts')
 
-    return render_template('admin.html', evals=evals)
+
+@user.route('/admin/cohorts')
+@user.route('/admin/cohorts/<int:id>')
+@admin_only
+def admin_cohorts(id=None):
+    if id is None:
+        cohorts = Cohort.query.all()
+
+        return render_template('admin_cohorts.html', cohorts=cohorts)
+    else:
+        cohort = Cohort.query.filter_by(id=id).one_or_none()
+
+        if cohort is None:
+            abort(404)
+
+        return render_template('admin_cohort.html', cohort=cohort)
 
 
 @user.route('/profile/<int:id>')

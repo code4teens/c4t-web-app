@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from flask_login import UserMixin
 from sqlalchemy import (
@@ -67,9 +67,27 @@ class User(UserMixin, Base):
         return filtered_evals
 
     @hybridmethod
+    def daily_evals(self, cohort_id, day):
+        date = self.evals(cohort_id)[0].cohort.start_date + timedelta(days=day)
+        filtered_evals = list(
+            filter(lambda x: x.date == date, self.evals(cohort_id))
+        )
+
+        return filtered_evals
+
+    @hybridmethod
     def incomplete_evals(self, cohort_id):
         incomplete_evals = [
             eval for eval in self.evals(cohort_id)
+            if eval.review is None or eval.feedback is None
+        ]
+
+        return incomplete_evals
+
+    @hybridmethod
+    def daily_incomplete_evals(self, cohort_id, day):
+        incomplete_evals = [
+            eval for eval in self.daily_evals(cohort_id, day)
             if eval.review is None or eval.feedback is None
         ]
 

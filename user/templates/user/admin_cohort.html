@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% set active_page = 'admin' %}
+
+{% block description %}
+<meta name="description" content="Admin">
+{% endblock %}
+
+{% block style %}
+<link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css"
+  rel="stylesheet">
+{% endblock %}
+
+{% block title %}Admin{% endblock %}
+
+{% block content %}
+<div class="container py-4" style="max-width: 960px;">
+  <h3 class="border-bottom mb-3 pb-3">Admin</h3>
+
+  <h4 class="mb-3">{{ cohort.name }}</h4>
+
+  <table
+    class="table table-bordered table-striped table-hover text-center w-100"
+    id="dataTable">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th class="visually-hidden" scope="col">ID</th>
+        <th scope="col">Username</th>
+        <th class="visually-hidden" scope="col">Username</th>
+        <th class="visually-hidden" scope="col">Discriminator</th>
+        <th scope="col">Display Name</th>
+        <th class="visually-hidden" scope="col">Display Name</th>
+        {% for day in range(cohort.duration) %}
+        <th>Day {{ loop.index }}</th>
+        <th class="visually-hidden">day_{{ loop.index }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for enrolment in cohort.enrolments if enrolment.user.is_admin ==
+      false %}
+      <tr>
+        <td>{{ enrolment.user.id }}</td>
+        <td class="visually-hidden">id={{ enrolment.user.id }}</td>
+        <td>{{ enrolment.user.name }}#{{ enrolment.user.discriminator }}
+        </td>
+        <td class="visually-hidden">username={{ enrolment.user.name }}#{{
+          enrolment.user.discriminator }}</td>
+        <td class="visually-hidden">discriminator={{
+          enrolment.user.discriminator }}</td>
+        <td><a href="/profile/{{ enrolment.user.id }}">{{
+            enrolment.user.display_name }}</a></td>
+        <td class="visually-hidden">display_name={{ enrolment.user.display_name
+          }}
+        </td>
+        {% for _ in range(cohort.duration) %}
+        <td>
+          {% if enrolment.user.daily_incomplete_evals(cohort.id,
+          loop.index0)|length == 0 %}
+          <span class="text-success">0/{{ enrolment.user.daily_evals(cohort.id,
+            loop.index0)|length }}</span>
+          {% else %}
+          <span class="text-danger">{{
+            enrolment.user.daily_incomplete_evals(cohort.id, loop.index0)|length
+            }}/{{ enrolment.user.daily_evals(cohort.id, loop.index0)|length
+            }}</span>
+          {% endif %}
+        </td>
+        <td class="visually-hidden">
+          {% if enrolment.user.daily_incomplete_evals(cohort.id,
+          loop.index0)|length == 0 %}
+          <span class="text-success">day_{{ loop.index }}=0</span>
+          {% else %}
+          <span class="text-danger">day_{{ loop.index}}={{
+            enrolment.user.daily_incomplete_evals(cohort.id, loop.index0)|length
+            }}</span>
+          {% endif %}
+        </td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+
+{% block script %}
+<script
+  src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script
+  src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#dataTable').DataTable({
+      "scrollX": true
+    });
+  });
+</script>
+{% endblock %}
