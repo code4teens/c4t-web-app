@@ -67,8 +67,8 @@ class User(UserMixin, Base):
         return filtered_evals
 
     @hybridmethod
-    def daily_evals(self, cohort_id, day):
-        date = self.evals(cohort_id)[0].cohort.start_date + timedelta(days=day)
+    def daily_evals(self, cohort_id, start_date, day):
+        date = start_date + timedelta(days=day)
         filtered_evals = list(
             filter(lambda x: x.date == date, self.evals(cohort_id))
         )
@@ -85,9 +85,9 @@ class User(UserMixin, Base):
         return incomplete_evals
 
     @hybridmethod
-    def daily_incomplete_evals(self, cohort_id, day):
+    def daily_incomplete_evals(self, cohort_id, start_date, day):
         incomplete_evals = [
-            eval for eval in self.daily_evals(cohort_id, day)
+            eval for eval in self.daily_evals(cohort_id, start_date, day)
             if eval.review is None or eval.feedback is None
         ]
 

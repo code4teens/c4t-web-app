@@ -57,23 +57,26 @@
         {% for _ in range(cohort.duration) %}
         <td>
           {% if enrolment.user.daily_incomplete_evals(cohort.id,
-          loop.index0)|length == 0 %}
+          cohort.start_date, loop.index0)|length == 0 %}
           <span class="text-success">0/{{ enrolment.user.daily_evals(cohort.id,
-            loop.index0)|length }}</span>
+            cohort.start_date, loop.index0)|length }}</span>
           {% else %}
           <span class="text-danger">{{
-            enrolment.user.daily_incomplete_evals(cohort.id, loop.index0)|length
-            }}/{{ enrolment.user.daily_evals(cohort.id, loop.index0)|length
+            enrolment.user.daily_incomplete_evals(cohort.id, cohort.start_date,
+            loop.index0)|length }}/{{ enrolment.user.daily_evals(cohort.id,
+            cohort.start_date,
+            loop.index0)|length
             }}</span>
           {% endif %}
         </td>
         <td class="visually-hidden">
           {% if enrolment.user.daily_incomplete_evals(cohort.id,
-          loop.index0)|length == 0 %}
+          cohort.start_date, loop.index0)|length == 0 %}
           <span class="text-success">day_{{ loop.index }}=0</span>
           {% else %}
           <span class="text-danger">day_{{ loop.index}}={{
-            enrolment.user.daily_incomplete_evals(cohort.id, loop.index0)|length
+            enrolment.user.daily_incomplete_evals(cohort.id, cohort.start_date,
+            loop.index0)|length
             }}</span>
           {% endif %}
         </td>
