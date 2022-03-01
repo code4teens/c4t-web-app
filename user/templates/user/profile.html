@@ -10,7 +10,7 @@
 
 {% block content %}
 <form class="container py-4" style="max-width: 960px;">
-  <h3 class="border-bottom mb-3 pb-3">Profile</h3>
+  <h3 class="border-bottom mb-3 pb-3">{{ user.display_name }}'s Profile</h3>
 
   <div class="row g-2">
     <div class="col-12">
@@ -47,20 +47,15 @@
         </button>
       </div>
     </div>
-
-    {% for enrolment in user.enrolments %}
-    <div class="col-12">
-      <label class="form-label" for="cohort-{{ loop.index }}">Cohort #{{
-        loop.index }}</label>
-      <input class="form-control" id="cohort-{{ loop.index }}"
-        value="{{ enrolment.cohort.name }}" readonly>
-    </div>
-    {% endfor %}
   </div>
 
   {% if user.id == current_user.id %}
   <a href="/change_password">
     <button class="btn btn-danger w-100 mt-3" type="button">Change password</button>
+  </a>
+  {% elif user.is_admin == false %}
+  <a href="/dashboard/{{ user.id }}">
+    <button class="btn btn-primary w-100 mt-3" type="button">View dashboard</button>
   </a>
   {% endif %}
 </form>
