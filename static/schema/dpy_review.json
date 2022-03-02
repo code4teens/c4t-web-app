@@ -1,268 +1,273 @@
 {
     "d1": {
-        "q1": {
+        "q1 ex01": {
             "title": "Does the code output <code class='text-success'>Hello World!</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q2": {
-            "title": "Did your peer write <code>text = 'Marvin'</code>?<br><small class='text-muted'>(Single or double quotes are fine)</small>",
+        "q2 ex02": {
+            "title": "Did your peer write <code>text = 'Marvin'</code>?<br><small class='text-muted'>(Single or double quotes is fine)</small>",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q3": {
+        "q3 ex03": {
             "title": "For each string that your peer displayed using string methods, give 1 point.",
             "q_type": "scaled",
-            "options": [1, 2, 3]
+            "options": [0, 1, 2, 3]
         },
-        "q4": {
+        "q4 ex04": {
             "title": "Does the code output <code class='text-success'>10.0</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q5": {
+        "q5 ex05": {
             "title": "Does the code output <code class='text-success'>the car exceeded the speed limit</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q6": {
+        "q6 ex06": {
             "title": "If the output matches the example output, give 1 point. If your peer is able to output <code class='text-success'>Pecos</code> without using <code>names[4]</code>, give 1 point.",
             "q_type": "scaled",
-            "options": [1, 2]
+            "options": [0, 1, 2]
         },
-        "q7": {
+        "q7 ex07": {
             "title": "Ask your peer how they were able to achieve the output. For each matching output and correct explanation in every line, give 1 point.",
             "q_type": "scaled",
-            "options": [1, 2, 3, 4]
+            "options": [0, 1, 2, 3, 4]
         }
     },
     "d2": {
-        "q1": {
+        "q1 ex01": {
             "title": "Set <code>speed = 60</code> and run the code, output should not say <code class='text-success'>over the speed limit</code>. Set <code>speed = 61</code>, output should say <code class='text-success'>over the speed limit</code>. If both conditions are met, select yes.",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q2": {
+        "q2 ex02": {
             "title": "Run <code>my_function()</code>. If the code outputs <code class='text-success'>Hi Marvin!</code>, select yes.",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q3": {
+        "q3 ex03": {
             "title": "Run the below code block: <br><code>say_hi('Toto')<br>say_hi('Fifi')</code><br><br>If the output matches below, select yes. <br><code class='text-success'>Hi Toto!<br>Hi Fifi!</code>",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q4": {
+        "q4 ex04": {
             "title": "Run <code>print(calculate(15,'/',5))</code>, the code should output <code class='text-success'>3</code>. Run again with your own set of tests including addition, subtraction and multiplication. If everything works as expected, select yes.",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q5": {
+        "q5 ex05": {
             "title": "Run <code>print(check_string('Hello World!'), check_string('The yes string'), check_string('Three four five'))</code>.<br><br>If the output matches below, select yes.<br><code class='text-success'>No!<br>Yes!<br>No!</code>",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q6": {
+        "q6 ex06": {
             "title": "Does the output match the example output? Does the code match the code snippet? If so, select yes.",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q7": {
+        "q7 ex07": {
             "title": "Check if the output matches the example output. Add <code>Egypt</code> and <code>Zambia</code> to the list, the output should now also include <code class='text-success'>Come and visit Egypt</code> and <code class='text-success'>Come and visit Zambia</code>. If all checks have passed, select yes.",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q8": {
+        "q8 ex08": {
             "title": "Run the code multiple times, is the output random?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q9": {
+        "q9 bonus01": {
             "title": "Does the code display the current time correctly?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         }
     },
     "d3": {
-        "q1": {
+        "q1 ex01": {
             "title": "Has the bot been added into the server?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q2": {
-            "title": "Is the bot online?",
+        "q2 ex02": {
+            "title": "If the bot is online when the script is run. (+1pt) If your peer's bot prints a login message onto the repl.it console (+1pt) Can they explain how they did it? (+1pt)",
+            "q_type": "scaled",
+            "options": [0, 1, 2, 3]
+        },
+        "q3 ex03": {
+            "title": "Did your peer manage to encapsulate their bot token inside a repl.it secret? (+1pt) Can they explain how they did it? (+1pt)",
+            "q_type": "scaled",
+            "options": [0, 1, 2]
+        },
+        "q4 ex04": {
+            "title": "Is the bot able to send the required message? (+1pt) How did they do it? (+1pt)",
+            "q_type": "scaled",
+            "options": [0, 1, 2]
+        },
+        "q5 ex05": {
+            "title": "Is the bot able to greet you using your Discord username?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q3": {
-            "title": "Does the bot print a login message onto the console when its ran?",
-            "q_type": "mcq",
-            "options": ["no", "yes"]
-        },
-        "q4": {
-            "title": "Is the bot able to greet you by your Discord username?",
-            "q_type": "mcq",
-            "options": ["no", "yes"]
-        },
-        "q5": {
-            "title": "Is the bot able to greet you by your Code4Teens server nickname?",
-            "q_type": "mcq",
-            "options": ["no", "yes"]
+        "q6 bonus01": {
+            "title": "Is your peer's bot able to greet you using your server nickname? (+1pt) Can they explain how they did it? (+1pt)",
+            "q_type": "scaled",
+            "options": [0, 1, 2]
         }
     },
     "d4": {
-        "q1": {
-            "title": "If all the objects are satisfied AND they can explain their code in their own words, select yes.",
+        "q1 ex01": {
+            "title": "Only tick 'yes' if all the objects are satisfied AND they can explain their code in their own words.",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q2": {
-            "title": "Is the bot able to repeat your message?",
+        "q2 ex02": {
+            "title": "Is the bot able to repeat your message? (+1pt) How did they do it? (+1pt)",
+            "q_type": "scaled",
+            "options": [0, 1, 2]
+        },
+        "q3 ex03": {
+            "title": "Is the bot able to repeat your message and delete your command? (+1pt) How did they do it? (+1pt)",
+            "q_type": "scaled",
+            "options": [0, 1, 2]
+        },
+        "q4 ex04": {
+            "title": "Is the bot able to play rock paper scissors? (+1pt) Ensure the bot is not hardcoded (+1pt)",
+            "q_type": "scaled",
+            "options": [0, 1, 2]
+        },
+        "q5 ex04": {
+            "title": "Is the bot able to detect who the winner is?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q3": {
-            "title": "Is the bot able to repeat your message and delete your command?",
-            "q_type": "mcq",
-            "options": ["no", "yes"]
-        },
-        "q4": {
-            "title": "Is the bot able to play rock paper scissors?<br><small class='text-muted'>(Verify that the outcomes are not hardcoded)</small>",
-            "q_type": "mcq",
-            "options": ["no", "yes"]
-        },
-        "q5": {
-            "title": "Is the bot able to tell who the winner was?",
-            "q_type": "mcq",
-            "options": ["no", "yes"]
-        },
-        "q6": {
+        "q6 ex05": {
             "title": "Does the bot have a user manual?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         }
     },
     "d5": {
-        "q1": {
+        "q1 ex01": {
             "title": "Is the bot able to send a random emoji using the command <code>$emoji</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q2": {
+        "q2 ex02": {
             "title": "Is the bot able to send a random emoji in an embed message form using the command <code>$emoji_embed</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q3": {
+        "q3 ex03": {
             "title": "Is the bot able to send a GIF using the command <code>$gif</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q4": {
+        "q4 ex04": {
             "title": "Is the bot able to send an image and a short description using the command <code>$intro</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q5": {
+        "q5 ex05": {
             "title": "Is the bot able to send an image using the command <code>$img</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q6": {
+        "q6 ex06": {
             "title": "Is the bot able to react to the message with a tick and a random emoji using the command <code>$react</code>?<br><small class='text-muted'>(Give 1 point if the bot reacts with either only a tick or a random emoji)<br>(Give 2 points if the bot reacts with both a tick and a random emoji)</small>",
             "q_type": "scaled",
-            "options": [1, 2]
+            "options": [0, 1, 2]
         }
     },
     "d6": {
-        "q1": {
+        "q1 ex01": {
             "title": "Section 1: Print the key-value pairs as shown in the example output.<br>Section 2: List all the available keys in the database.<br>Section 3: Delete a key and print the updated list.<br><small class='text-muted'>(Give 1 point for each section)</small>",
             "q_type": "scaled",
-            "options": [1, 2, 3]
+            "options": [0, 1, 2, 3]
         },
-        "q2": {
+        "q2 ex02": {
             "title": "Section 1: Add one element to <code>fruit</code>.<br>Section 2: Add two elements to <code>dessert</code>.<br>Section 3: Delete any one element from <code>dessert</code>.<br>Section 4: List all keys and values in the database.<br><small class='text-muted'>(Give 1 point for each section)</small>",
             "q_type": "scaled",
-            "options": [1, 2, 3, 4]
+            "options": [0, 1, 2, 3, 4]
         },
-        "q3": {
+        "q3 ex03": {
             "title": "Section 1: Add a new key to the database using an <code>if-else</code> statement.<br>Section 2: Add <code>Good Luck</code> as the value for the key.<br>Section 3: Output the key-value pair.<br><small class='text-muted'>(Give 1 point for each section)</small>",
             "q_type": "scaled",
-            "options": [1, 2, 3]
+            "options": [0, 1, 2, 3]
         },
-        "q4": {
+        "q4 ex04": {
             "title": "Is the bot able to add a new message to the database using the command <code>$new [your message here]</code>?<br><small class='text-muted'>(If the message was successfully added, the bot should say <code class='text-success'>New encouraging message added.</code> as per given example)</small>",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q5": {
+        "q5 ex05": {
             "title": "Is the bot able to list all messages stored in the database using the command <code>$list</code>?<br><small class='text-muted'>(Select no if the bot's message contains <code class='text-success'>ObservedList</code>)</small>",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q6": {
+        "q6 ex06": {
             "title": "Is the bot able to delete a specific message based on its index from the database using the command <code>$delete [index of message]</code>?<br><small class='text-muted'>(If the message was successfully deleted, the bot should say <code class='text-success'>Encouraging message deleted.</code> as per given example)</small>",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q7": {
+        "q7 ex07": {
             "title": "Is the bot able to delete a specific message based on its index from the database, and display the updated list of messages using the command <code>$del_list? [index of message]</code><br><small class='text-muted'>(Give 1 point for delete or list function)<br>(Give 2 points for both but with <code class='text-success'>ObservedList</code> problem)<br>(Give 3 points if the output matches given example)</small>",
             "q_type": "scaled",
-            "options": [1, 2, 3]
+            "options": [0, 1, 2, 3]
         }
     },
     "d7": {
-        "q1": {
+        "q1 ex01": {
             "title": "Is the bot able to scrape the first paragraph from the website using the command <code>$scrape</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q2": {
+        "q2 ex02": {
             "title": "Is the bot able to scrape the correct table row from the website using the command <code>$programming</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q3": {
+        "q3 ex02": {
             "title": "How many elements is the bot able to scrape from the table using the command <code>$programming</code>?<br><small class='text-muted'>(Give 1 point for each element)</small>",
             "q_type": "scaled",
-            "options": [1, 2, 3, 4, 5, 6]
+            "options": [0, 1, 2, 3, 4, 5, 6]
         },
-        "q4": {
+        "q4 ex03": {
             "title": "Is the bot able to scrape a Currency (e.g. USD) and its Exchange Rate from the website using the command <code>$currency</code>?",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q5": {
+        "q5 ex04": {
             "title": "Is the bot able to scrape the Job Title, Company Name and Salary from the website?<br><small class='text-muted'>(Give 1 point for each element)</small>",
             "q_type": "scaled",
-            "options": [1, 2, 3]
+            "options": [0, 1, 2, 3]
         },
-        "q6": {
+        "q6 ex04": {
             "title": "Section 1: Is the bot able to scrape and compile the 1st and 2nd job's info from the website using command <code>$job</code>?<br><small class='text-muted'>(Give 1 point for each job info)</small><br>Section 2: Is your peer's bot able to send the scraped job list in an embed message form using the command <code>$job</code>?<br><small class='text-muted'>(Give 1 point for embed message)</small>",
             "q_type": "scaled",
-            "options": [1, 2, 3]
+            "options": [0, 1, 2, 3]
         },
-        "q7": {
+        "q7 bonus01": {
             "title": "Section 1: Is the bot able to scrape the movie title <span class='text-muted'>(1 point)</span> and storyline <span class='text-muted'>(1 point)</span> from the website.<br>Section 2: Is the bot able to display an error message when no movie title was passed as an argument to the command <code>$movie [your movie title]</code> <span class='text-muted'>(1 point)</span>",
             "q_type": "scaled",
-            "options": [1, 2, 3]
+            "options": [0, 1, 2, 3]
         }
     },
     "d8": {
-        "q1": {
+        "q1 ex01": {
             "title": "Is the bot able to return its IPv4 address using the command <code>$ip</code>?<br><small class='text-muted'>(Verify that the bot sends an API request)</small>",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q2": {
+        "q2 ex02": {
             "title": "Is the bot able to return its geographical location using the command <code>$iploc</code>?<br><small class='text-muted'>(Verify that the bot sends 2 API requests)</small>",
             "q_type": "mcq",
             "options": ["no", "yes"]
         },
-        "q3": {
+        "q3 ex03": {
             "title": "Is the bot able to output your peer's account information? <span class='text-muted'>(1 point)</span><br>Did the bot send an API request? <span class='text-muted'>(1 point)</span><br>Is the API token set in an environment variable? <span class='text-muted'>(1 point)</span>",
             "q_type": "scaled",
-            "options": [1, 2, 3]
+            "options": [0, 1, 2, 3]
         }
     }
 }
