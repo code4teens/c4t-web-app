@@ -34,6 +34,11 @@
             "title": "Ask your peer how they were able to achieve the output. For each matching output and correct explanation in every line, give 1 point.",
             "q_type": "scaled",
             "options": [0, 1, 2, 3, 4]
+        },
+        "bonus ex01": {
+            "title": "Ask your peer to explain the method they used. Let's change a few variables, set <code>name = Joe</code> , <code>dog = Snoopy</code> , <code>shoes = 5</code> . Run the code, does it output <code class='text-success'>Joe's dog Snoopy ate 5 pairs of shoes.</code>",
+            "q_type": "mcq",
+            "options": ["no", "yes"]
         }
     },
     "d2": {
